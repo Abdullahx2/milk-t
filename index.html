@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milt+T - Spin & Win Bonus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #b8c1ec;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+        
+        .instruction {
+            font-size: 1.3rem;
+            color: #fff;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            border-left: 5px solid #ffd93d;
+        }
+        
+        /* WHEEL CONTAINER */
+        .wheel-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 30px auto;
+        }
+        
+        @media (max-width: 500px) {
+            .wheel-container {
+                width: 300px;
+                height: 300px;
+            }
+        }
+        
+        .wheel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 10px solid #2d4059;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            transition: transform 3s cubic-bezier(0.17, 0.67, 0.21, 0.99);
+        }
+        
+        .wheel-section {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 50%);
+            transform-origin: 50% 50%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 30%;
+            box-sizing: border-box;
+        }
+        
+        .section-1 {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            transform: rotate(0deg);
+        }
+        
+        .section-2 {
+            background: linear-gradient(45deg, #6bcf7f, #8de39e);
+            transform: rotate(120deg);
+        }
+        
+        .section-3 {
+            background: linear-gradient(45deg, #4d96ff, #6babff);
+            transform: rotate(240deg);
+        }
+        
+        .section-text {
+            transform: rotate(90deg);
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            white-space: nowrap;
+        }
+        
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: #2d4059;
+            border-radius: 50%;
+            border: 8px solid #ffd93d;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(255, 217, 61, 0.5);
+        }
+        
+        .spin-btn {
+            background: linear-gradient(45deg, #ffd93d, #ffb347);
+            color: #1a1a2e;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 10px 25px rgba(255, 217, 61, 0.4);
+            letter-spacing: 1px;
+        }
+        
+        .spin-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 217, 61, 0.6);
+        }
+        
+        .spin-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .pointer {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 60px;
+            background: #ff6b6b;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            z-index: 20;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+        }
+        
+        /* BONUS REVEAL */
+        .reveal-section {
+            display: none;
+            margin-top: 50px;
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            border: 3px solid #ffd93d;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .reveal-section.show {
+            display: block;
+        }
+        
+        .reveal-title {
+            font-size: 2.2rem;
+            color: #ffd93d;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .bonus-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .bonus-name {
+            font-size: 1.8rem;
+            color: #ffd93d;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .bonus-detail {
+            padding: 15px;
+            margin: 12px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .bonus-detail i {
+            color: #ffd93d;
+            font-size: 1.2rem;
+            width: 30px;
+        }
+        
+        .screenshot-box {
+            background: linear-gradient(90deg, rgba(255, 107, 107, 0.2), rgba(255, 217, 61, 0.2));
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            font-size: 1.4rem;
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background: #ffd93d;
+            border-radius: 50%;
+            opacity: 0;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        
+        footer {
+            margin-top: 40px;
+            color: #7a86b6;
+            font-size: 0.9rem;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .celebrate {
+            animation: celebrate 0.5s ease 3;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px 20px;
+            }
+            
+            .logo {
+                font-size: 2.8rem;
+            }
+            
+            .wheel-container {
+                width: 320px;
+                height: 320px;
+            }
+            
+            .spin-btn {
+                padding: 16px 35px;
+                font-size: 1.2rem;
+            }
+            
+            .reveal-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="logo">MILT+T</h1>
+            <p class="tagline">SPIN TO WIN YOUR BONUS</p>
+        </div>
+        
+        <div class="instruction">
+            🎡 <strong>SPIN THE WHEEL TO REVEAL YOUR EXCLUSIVE BONUS!</strong><br>
+            <small style="color: #b8c1ec;">One spin, one bonus - let luck decide!</small>
+        </div>
+        
+        <!-- WHEEL SECTION -->
+        <div class="wheel-container">
+            <div class="pointer"></div>
+            <div class="wheel" id="wheel">
+                <div class="wheel-section section-1">
+                    <div class="section-text">BONUS 1</div>
+                </div>
+                <div class="wheel-section section-2">
+                    <div class="section-text">BONUS 2</div>
+                </div>
+                <div class="wheel-section section-3">
+                    <div class="section-text">BONUS 3</div>
+                </div>
+                <div class="wheel-center">
+                    SPIN!
+                </div>
+            </div>
+        </div>
+        
+        <button class="spin-btn" id="spinBtn" onclick="spinWheel()">
+            <i class="fas fa-redo"></i> SPIN THE WHEEL
+        </button>
+        
+        <!-- REVEAL SECTION -->
+        <div class="reveal-section" id="revealSection">
+            <h2 class="reveal-title">
+                <i class="fas fa-trophy"></i>
+                <span>CONGRATULATIONS!</span>
+                <i class="fas fa-trophy"></i>
+            </h2>
+            
+            <div class="bonus-card" id="bonusCard">
+                <!-- Bonus will appear here -->
+            </div>
+            
+            <div class="screenshot-box">
+                <i class="fas fa-camera fa-2x"></i>
+                <div style="margin-top: 10px;">
+                    <strong>📸 TAKE SCREENSHOT NOW!</strong><br>
+                    Send this to our support team to claim your bonus
+                </div>
+            </div>
+            
+            <div style="text-align: center; color: #b8c1ec; margin-top: 20px;">
+                <i class="fas fa-lock"></i> Your bonus has been locked in
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        &copy; <span id="currentYear"></span> Milt+T Gaming Platform. For players 18+ only.
+    </footer>
+
+    <script>
+        // Bonus data - SHUFFLED for Milt+T
+        const bonuses = [
+            {
+                title: "🎰 100% DEPOSIT BONUS",
+                color: "#4d96ff",
+                details: [
+                    "100% Bonus on next Deposit $5 – $15",
+                    "50% Cashback if you lose",
+                    "Redeem up to $300",
+                    "Instant Cashout"
+                ]
+            },
+            {
+                title: "💰 50% + FREE PLAY BONUS",
+                color: "#6bcf7f",
+                details: [
+                    "50% Bonus on next Deposit $5 – $15",
+                    "5 Free Plays if you lose",
+                    "Redeem up to $250",
+                    "Instant Cashout"
+                ]
+            },
+            {
+                title: "👑 70% HIGH ROLLER BONUS",
+                color: "#ff6b6b",
+                details: [
+                    "70% Bonus on next Deposit $10 – $40",
+                    "$10 Cashback if you lose",
+                    "Redeem up to $300",
+                    "Instant Cashout"
+                ]
+            }
+        ];
+        
+        let isSpinning = false;
+        let hasSpun = false;
+        
+        function spinWheel() {
+            if (isSpinning || hasSpun) return;
+            
+            isSpinning = true;
+            const spinBtn = document.getElementById('spinBtn');
+            spinBtn.disabled = true;
+            spinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> SPINNING...';
+            
+            // Random rotation (3 full rotations + bonus section)
+            const bonusIndex = Math.floor(Math.random() * 3); // 0, 1, or 2
+            const extraDegrees = bonusIndex * 120; // 0°, 120°, or 240°
+            const totalRotation = 1080 + extraDegrees; // 3 full rotations + bonus section
+            
+            const wheel = document.getElementById('wheel');
+            wheel.style.transform = `rotate(${totalRotation}deg)`;
+            
+            // After spin completes
+            setTimeout(() => {
+                isSpinning = false;
+                revealBonus(bonusIndex);
+                createConfetti();
+            }, 3000);
+        }
+        
+        function revealBonus(index) {
+            const bonus = bonuses[index];
+            const bonusCard = document.getElementById('bonusCard');
+            
+            bonusCard.innerHTML = `
+                <h3 class="bonus-name">${bonus.title}</h3>
+                ${bonus.details.map(detail => `
+                    <div class="bonus-detail">
+                        <i class="fas fa-check-circle"></i>
+                        <span>${detail}</span>
+                    </div>
+                `).join('')}
+            `;
+            
+            // Show reveal section with animation
+            const revealSection = document.getElementById('revealSection');
+            revealSection.classList.add('show');
+            
+            // Add celebration animation
+            bonusCard.classList.add('celebrate');
+            
+            // Scroll to reveal section
+            setTimeout(() => {
+                revealSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500);
+            
+            // Show screenshot alert
+            setTimeout(() => {
+                alert("🎉 BONUS REVEALED!\n\n📸 Please take a screenshot NOW\n\nSend the screenshot to Milt+T support team\n\nClaim your bonus within 24 hours!");
+            }, 800);
+            
+            hasSpun = true;
+        }
+        
+        function createConfetti() {
+            const colors = ['#ffd93d', '#ff6b6b', '#4d96ff', '#6bcf7f'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-20px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.opacity = '1';
+                confetti.style.width = Math.random() * 15 + 5 + 'px';
+                confetti.style.height = confetti.style.width;
+                document.body.appendChild(confetti);
+                
+                // Animation
+                confetti.animate([
+                    { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+                    { transform: `translate(${Math.random() * 100 - 50}px, 100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                });
+                
+                // Remove after animation
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+        
+        // Set current year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Add click sound effect (optional)
+        function playSpinSound() {
+            // You can add actual sound here if needed
+            console.log("Spin sound played");
+        }
+    </script>
+</body>
+</html>
