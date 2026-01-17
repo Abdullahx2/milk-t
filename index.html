@@ -50,20 +50,6 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-            position: relative;
-            display: inline-block;
-        }
-
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, #FFD700, transparent);
-            border-radius: 2px;
         }
 
         .instructions {
@@ -85,7 +71,7 @@
             border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
-        /* WHEEL CONTAINER - FIXED */
+        /* PERFECT WHEEL CONTAINER */
         .wheel-container {
             position: relative;
             width: min(90vw, 400px);
@@ -114,58 +100,38 @@
             transition: transform 3s cubic-bezier(0.17, 0.67, 0.22, 0.99);
         }
 
-        /* CORRECT WHEEL SECTIONS - 3 EQUAL PARTS */
+        /* PERFECT CIRCLE SECTIONS - NO TRIANGLES */
         .wheel-section {
             position: absolute;
-            width: 50%;
-            height: 50%;
-            transform-origin: bottom right;
-            left: 0;
-            top: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-left: 40px;
-            padding-bottom: 20px;
-            box-sizing: border-box;
-            clip-path: polygon(100% 0, 100% 100%, 0 100%);
-        }
-
-        /* POSITION EACH SECTION AT 0°, 120°, 240° */
-        .section1 { transform: rotate(0deg); }
-        .section2 { transform: rotate(120deg); }
-        .section3 { transform: rotate(240deg); }
-
-        .section-content {
-            transform: rotate(45deg);
-            text-align: center;
-            color: white;
-            font-weight: 800;
-            font-size: 1.4rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             width: 100%;
-            padding-left: 30px;
+            height: 100%;
+            clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%);
+            transform-origin: center;
         }
 
-        .prize-amount {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 5px;
+        .section1 { 
+            transform: rotate(0deg); 
+            background: linear-gradient(135deg, #FF4500, #FF6347);
+        }
+        
+        .section2 { 
+            transform: rotate(120deg); 
+            background: linear-gradient(135deg, #32CD32, #228B22);
+        }
+        
+        .section3 { 
+            transform: rotate(240deg); 
+            background: linear-gradient(135deg, #FFD700, #FFA500);
         }
 
-        .prize-label {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        /* WHEEL CENTER */
+        /* SMOOTH CENTER CIRCLE */
         .wheel-center {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             background: linear-gradient(135deg, #FFD700, #FFA500);
             border-radius: 50%;
             z-index: 10;
@@ -173,13 +139,13 @@
             align-items: center;
             justify-content: center;
             box-shadow: 
-                0 0 25px rgba(255, 215, 0, 0.8),
-                inset 0 0 15px rgba(255, 255, 255, 0.4);
-            border: 6px solid white;
+                0 0 30px rgba(255, 215, 0, 0.8),
+                inset 0 0 20px rgba(255, 255, 255, 0.4);
+            border: 8px solid white;
         }
 
         .wheel-center span {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 900;
             color: white;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
@@ -188,7 +154,7 @@
         /* POINTER */
         .pointer {
             position: absolute;
-            top: -35px;
+            top: -40px;
             left: 50%;
             transform: translateX(-50%);
             width: 40px;
@@ -205,6 +171,39 @@
             border-right: 20px solid transparent;
             border-top: 40px solid #FF4500;
             filter: drop-shadow(0 5px 15px rgba(255, 69, 0, 0.5));
+        }
+
+        /* BONUS TEXT INSIDE SECTIONS */
+        .bonus-text {
+            position: absolute;
+            top: 65%;
+            left: 70%;
+            transform: translate(-50%, -50%) rotate(60deg);
+            text-align: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.6rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 5;
+            width: 120px;
+        }
+
+        .bonus-text.section2 {
+            top: 15%;
+            left: 30%;
+            transform: translate(-50%, -50%) rotate(180deg);
+        }
+
+        .bonus-text.section3 {
+            top: 65%;
+            left: 30%;
+            transform: translate(-50%, -50%) rotate(300deg);
+        }
+
+        .bonus-amount {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 5px;
         }
 
         /* SPIN BUTTON */
@@ -365,20 +364,20 @@
             }
             
             .wheel-center {
-                width: 65px;
-                height: 65px;
+                width: 80px;
+                height: 80px;
             }
             
             .wheel-center span {
+                font-size: 1.5rem;
+            }
+            
+            .bonus-text {
                 font-size: 1.3rem;
+                width: 100px;
             }
             
-            .section-content {
-                font-size: 1.2rem;
-                padding-left: 25px;
-            }
-            
-            .prize-amount {
+            .bonus-amount {
                 font-size: 1.7rem;
             }
             
@@ -411,12 +410,30 @@
             </div>
         </div>
 
-        <!-- WHEEL - FIXED 3 SECTIONS -->
+        <!-- PERFECT WHEEL -->
         <div class="wheel-container">
             <div class="pointer"></div>
             <div class="wheel">
                 <div class="wheel-inner" id="wheel">
-                    <!-- 3 sections will be created by JavaScript -->
+                    <!-- 3 perfect circle sections -->
+                    <div class="wheel-section section1">
+                        <div class="bonus-text section1">
+                            <div class="bonus-amount">150%</div>
+                            <div>BONUS</div>
+                        </div>
+                    </div>
+                    <div class="wheel-section section2">
+                        <div class="bonus-text section2">
+                            <div class="bonus-amount">70%</div>
+                            <div>BONUS</div>
+                        </div>
+                    </div>
+                    <div class="wheel-section section3">
+                        <div class="bonus-text section3">
+                            <div class="bonus-amount">100%</div>
+                            <div>BONUS</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="wheel-center">
                     <span>SPIN</span>
@@ -461,8 +478,6 @@
                 ifLose: "5 FREE PLAYS",
                 redeem: "$250",
                 color: "#FF4500",
-                bgColor: "#FF4500",
-                icon: "🔥",
                 description: "Mega Bonus"
             },
             { 
@@ -471,8 +486,6 @@
                 ifLose: "$10 CASHBACK",
                 redeem: "$300",
                 color: "#32CD32",
-                bgColor: "#32CD32",
-                icon: "💎",
                 description: "Premium Bonus"
             },
             { 
@@ -481,37 +494,15 @@
                 ifLose: "50% CASHBACK",
                 redeem: "$300",
                 color: "#FFD700",
-                bgColor: "#FFD700",
-                icon: "🛡️",
                 description: "Safe Bonus"
             }
         ];
-
-        // Create wheel with 3 equal sections (120° each)
-        const wheel = document.getElementById('wheel');
-        
-        // Create 3 sections
-        prizes.forEach((prize, index) => {
-            const section = document.createElement('div');
-            section.className = `wheel-section section${index + 1}`;
-            section.style.background = `linear-gradient(135deg, ${prize.bgColor} 0%, ${darkenColor(prize.bgColor, 20)} 100%)`;
-            
-            const content = document.createElement('div');
-            content.className = 'section-content';
-            content.innerHTML = `
-                <div class="prize-amount">${prize.type.split(' ')[0]}</div>
-                <div class="prize-label">${prize.icon}</div>
-            `;
-            content.style.color = prize.color === '#FFD700' ? '#000' : '#fff';
-            
-            section.appendChild(content);
-            wheel.appendChild(section);
-        });
 
         // Wheel animation logic
         let isSpinning = false;
         let hasSpun = false;
         let currentRotation = 0;
+        const wheel = document.querySelector('.wheel-inner');
         const spinBtn = document.getElementById('spinBtn');
         const resultDisplay = document.getElementById('resultDisplay');
         const resultTitle = document.getElementById('resultTitle');
@@ -616,7 +607,6 @@
         }
 
         function createConfetti(color) {
-            // Confetti effect
             const confettiCount = 30;
             const emojis = ['🎉', '🎊', '✨', '⭐', '🎁', '💰', '🏆'];
             
@@ -643,20 +633,6 @@
                 document.body.appendChild(confetti);
                 animation.onfinish = () => confetti.remove();
             }
-        }
-
-        function darkenColor(color, percent) {
-            const num = parseInt(color.replace("#", ""), 16);
-            const amt = Math.round(2.55 * percent);
-            const R = (num >> 16) - amt;
-            const G = (num >> 8 & 0x00FF) - amt;
-            const B = (num & 0x0000FF) - amt;
-            return "#" + (
-                0x1000000 +
-                (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
-                (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
-                (B < 255 ? (B < 1 ? 0 : B) : 255)
-            ).toString(16).slice(1);
         }
 
         // Initialize wheel position
