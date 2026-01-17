@@ -2,109 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milt+T - Premium Wheel Bonus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* RESET & BASE */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             -webkit-tap-highlight-color: transparent;
-            -webkit-text-size-adjust: 100%;
-        }
-        
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
         }
         
         body {
-            background: #0a0a12;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.4;
+            background: #0f0f18;
+            color: white;
             min-height: 100vh;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 15px;
-            position: relative;
         }
         
-        /* MAIN CONTAINER - FIXED WIDTH FOR MOBILE */
-        .container {
+        /* MAIN CONTAINER */
+        .main-container {
             width: 100%;
             max-width: 500px;
-            background: linear-gradient(165deg, #141420, #0f0f18);
+            background: linear-gradient(145deg, #1a1a24, #13131d);
             border-radius: 20px;
-            padding: 25px 20px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 
-                0 10px 40px rgba(0, 0, 0, 0.8),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
             position: relative;
-            margin: 0 auto;
+            overflow: hidden;
         }
         
-        /* HEADER - COMPACT */
+        /* HEADER */
         .header {
             text-align: center;
             margin-bottom: 25px;
         }
         
         .logo {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 900;
             background: linear-gradient(135deg, #ff0080, #ff8c00, #40e0d0);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             margin-bottom: 10px;
-            letter-spacing: -0.5px;
         }
         
         .tagline {
-            font-size: 1rem;
             color: #a0a0c0;
-            font-weight: 300;
-            padding: 0 10px;
+            font-size: 1rem;
         }
         
         /* INSTRUCTION */
-        .instruction {
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 12px;
-            padding: 16px;
+        .instruction-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 18px;
             margin: 20px 0;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
         
-        .instruction-text {
-            font-size: 1.1rem;
-            color: #40e0d0;
-            font-weight: 500;
-            margin-bottom: 6px;
-        }
-        
-        /* WHEEL SECTION - COMPACT */
-        .wheel-section {
-            margin: 25px 0;
-            padding: 20px 15px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .wheel-wrapper {
+        /* WHEEL SECTION */
+        .wheel-container {
             position: relative;
-            width: 280px;
-            height: 280px;
-            margin: 0 auto;
+            width: 300px;
+            height: 300px;
+            margin: 25px auto;
         }
         
         /* WHEEL */
@@ -114,25 +84,18 @@
             position: relative;
             border-radius: 50%;
             overflow: hidden;
-            border: 10px solid #1e1e2e;
-            box-shadow: 
-                0 0 30px rgba(0, 0, 0, 0.7),
-                inset 0 0 25px rgba(0, 0, 0, 0.5);
-            transition: transform 3.5s cubic-bezier(0.1, 0.2, 0.3, 1);
-            transform-origin: center;
+            border: 10px solid #252535;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+            transition: transform 3s cubic-bezier(0.1, 0.2, 0.3, 1);
         }
         
-        .wheel-section-part {
+        /* WHEEL SECTIONS - CLEAN SEPARATION */
+        .wheel-section {
             position: absolute;
             width: 100%;
             height: 100%;
             clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 50%);
             transform-origin: 50% 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding-left: 20%;
         }
         
         .section-1 {
@@ -150,21 +113,35 @@
             transform: rotate(240deg);
         }
         
-        /* EMOJIS ON WHEEL */
-        .section-emoji {
-            font-size: 2.2rem;
-            transform: rotate(60deg);
-            margin-bottom: 8px;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        /* EMOJI CONTAINERS - SEPARATE FROM COLORS */
+        .emoji-container {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            z-index: 5;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 0;
         }
         
-        .section-text {
-            transform: rotate(60deg);
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-            white-space: nowrap;
+        .emoji-1 {
+            background: rgba(255, 0, 128, 0.9);
+            transform: translate(-50%, -50%) rotate(60deg) translateY(-120px);
+        }
+        
+        .emoji-2 {
+            background: rgba(255, 140, 0, 0.9);
+            transform: translate(-50%, -50%) rotate(180deg) translateY(-120px);
+        }
+        
+        .emoji-3 {
+            background: rgba(64, 224, 208, 0.9);
+            transform: translate(-50%, -50%) rotate(300deg) translateY(-120px);
         }
         
         /* WHEEL CENTER */
@@ -175,31 +152,30 @@
             transform: translate(-50%, -50%);
             width: 70px;
             height: 70px;
-            background: #1e1e2e;
+            background: #252535;
             border-radius: 50%;
             border: 6px solid #ff0080;
-            z-index: 10;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 900;
-            font-size: 1rem;
-            box-shadow: 0 0 25px rgba(255, 0, 128, 0.5);
+            font-weight: 800;
+            font-size: 1.1rem;
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
         }
         
         /* ARROW */
         .pointer {
             position: absolute;
-            top: -25px;
+            top: -20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 30px;
-            height: 45px;
+            width: 25px;
+            height: 40px;
             background: #ff0080;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            z-index: 20;
-            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+            z-index: 15;
         }
         
         .pointer::after {
@@ -208,8 +184,8 @@
             top: 3px;
             left: 50%;
             transform: translateX(-50%);
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background: #40e0d0;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
@@ -222,16 +198,11 @@
             padding: 18px 40px;
             border-radius: 50px;
             font-size: 1.2rem;
-            font-weight: 800;
+            font-weight: 700;
             cursor: pointer;
-            margin: 25px auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
+            margin: 20px auto;
+            display: block;
             box-shadow: 0 10px 25px rgba(255, 0, 128, 0.3);
-            width: 100%;
-            max-width: 300px;
             transition: transform 0.2s;
         }
         
@@ -242,16 +213,15 @@
         .spin-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-            transform: none !important;
         }
         
         /* REVEAL SECTION */
         .reveal-section {
             display: none;
             margin-top: 30px;
-            padding: 25px 20px;
-            background: linear-gradient(165deg, rgba(30, 30, 40, 0.9), rgba(20, 20, 30, 0.95));
-            border-radius: 18px;
+            padding: 25px;
+            background: linear-gradient(145deg, rgba(30, 30, 40, 0.9), rgba(20, 20, 30, 0.95));
+            border-radius: 20px;
             border: 2px solid #40e0d0;
             animation: fadeIn 0.5s ease;
         }
@@ -267,26 +237,23 @@
         
         .reveal-title {
             font-size: 1.8rem;
-            text-align: center;
             color: #40e0d0;
+            text-align: center;
             margin-bottom: 20px;
-            font-weight: 700;
         }
         
         .bonus-card {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
-            padding: 25px 20px;
+            padding: 20px;
             margin: 20px 0;
-            border: 1px solid rgba(255, 255, 255, 0.08);
         }
         
         .bonus-name {
             font-size: 1.5rem;
-            font-weight: 800;
             color: #ff8c00;
-            margin-bottom: 20px;
             text-align: center;
+            margin-bottom: 20px;
         }
         
         .bonus-details {
@@ -299,7 +266,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 14px;
+            padding: 12px;
             background: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             font-size: 1rem;
@@ -317,119 +284,63 @@
             padding: 20px;
             margin: 25px 0;
             text-align: center;
-            border-left: 4px solid #ff0080;
         }
         
         .screenshot-title {
             font-size: 1.3rem;
             color: #ff8c00;
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
         }
         
         /* FOOTER */
         footer {
             margin-top: 25px;
             color: #666680;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             text-align: center;
             padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             width: 100%;
-        }
-        
-        /* RESPONSIVE FIXES */
-        @media (max-width: 400px) {
-            .container {
-                padding: 20px 15px;
-                border-radius: 18px;
-            }
-            
-            .wheel-wrapper {
-                width: 250px;
-                height: 250px;
-            }
-            
-            .section-emoji {
-                font-size: 1.8rem;
-            }
-            
-            .section-text {
-                font-size: 0.75rem;
-            }
-            
-            .wheel-center {
-                width: 60px;
-                height: 60px;
-                font-size: 0.9rem;
-            }
-            
-            .spin-btn {
-                padding: 16px 30px;
-                font-size: 1.1rem;
-            }
-        }
-        
-        /* PREVENT ZOOM */
-        @media screen and (max-width: 768px) {
-            body {
-                touch-action: manipulation;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="main-container">
         <!-- HEADER -->
         <div class="header">
             <h1 class="logo">MILT+T</h1>
-            <p class="tagline">Spin the wheel for exclusive bonus</p>
+            <p class="tagline">Spin to reveal your exclusive bonus</p>
         </div>
         
         <!-- INSTRUCTION -->
-        <div class="instruction">
-            <p class="instruction-text">Spin to reveal your bonus</p>
+        <div class="instruction-box">
+            <p style="color: #40e0d0; font-weight: 600; margin-bottom: 5px;">Click SPIN button to reveal bonus</p>
             <p style="color: #a0a0c0; font-size: 0.9rem;">One spin per user. Bonus locked after selection.</p>
         </div>
         
-        <!-- WHEEL SECTION -->
-        <div class="wheel-section">
-            <div class="wheel-wrapper">
-                <div class="pointer"></div>
-                
-                <div class="wheel" id="wheel">
-                    <!-- SECTION 1 -->
-                    <div class="wheel-section-part section-1">
-                        <div class="section-emoji">🎮</div>
-                        <div class="section-text">FREE PLAYS</div>
-                    </div>
-                    
-                    <!-- SECTION 2 -->
-                    <div class="wheel-section-part section-2">
-                        <div class="section-emoji">💰</div>
-                        <div class="section-text">CASHBACK</div>
-                    </div>
-                    
-                    <!-- SECTION 3 -->
-                    <div class="wheel-section-part section-3">
-                        <div class="section-emoji">👑</div>
-                        <div class="section-text">HIGH ROLLER</div>
-                    </div>
-                    
-                    <div class="wheel-center">SPIN</div>
-                </div>
-            </div>
+        <!-- WHEEL -->
+        <div class="wheel-container">
+            <div class="pointer"></div>
             
-            <div style="text-align: center;">
-                <button class="spin-btn" id="spinBtn" onclick="spinWheel()">
-                    <i class="fas fa-redo-alt"></i>
-                    SPIN WHEEL
-                </button>
+            <div class="wheel" id="wheel">
+                <!-- WHEEL COLORS -->
+                <div class="wheel-section section-1"></div>
+                <div class="wheel-section section-2"></div>
+                <div class="wheel-section section-3"></div>
+                
+                <!-- SEPARATE EMOJIS (NOT IN COLORS) -->
+                <div class="emoji-container emoji-1">🎮</div>
+                <div class="emoji-container emoji-2">💰</div>
+                <div class="emoji-container emoji-3">👑</div>
+                
+                <div class="wheel-center">SPIN</div>
             </div>
         </div>
+        
+        <!-- SPIN BUTTON -->
+        <button class="spin-btn" id="spinBtn" onclick="spinWheel()">
+            <i class="fas fa-redo-alt"></i> SPIN THE WHEEL
+        </button>
         
         <!-- REVEAL SECTION -->
         <div class="reveal-section" id="revealSection">
@@ -440,37 +351,34 @@
             </div>
             
             <div class="screenshot-box">
-                <h3 class="screenshot-title">
-                    <i class="fas fa-camera"></i>
-                    TAKE SCREENSHOT
-                </h3>
-                <p style="color: #a0a0c0; font-size: 1rem; margin-bottom: 15px;">
-                    Send screenshot to support to claim bonus
+                <h3 class="screenshot-title">📸 TAKE SCREENSHOT</h3>
+                <p style="color: #a0a0c0; margin-bottom: 15px;">
+                    Send this screenshot to Milt+T support to claim your bonus
                 </p>
-                <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <div style="display: flex; justify-content: center; gap: 20px;">
                     <div style="text-align: center;">
-                        <div style="font-size: 1.8rem; color: #ff0080;">1</div>
+                        <div style="font-size: 1.5rem; color: #ff0080;">1</div>
                         <div style="font-size: 0.8rem; color: #a0a0c0;">Screenshot</div>
                     </div>
                     <div style="text-align: center;">
-                        <div style="font-size: 1.8rem; color: #ff8c00;">2</div>
+                        <div style="font-size: 1.5rem; color: #ff8c00;">2</div>
                         <div style="font-size: 0.8rem; color: #a0a0c0;">Send</div>
                     </div>
                     <div style="text-align: center;">
-                        <div style="font-size: 1.8rem; color: #40e0d0;">3</div>
+                        <div style="font-size: 1.5rem; color: #40e0d0;">3</div>
                         <div style="font-size: 0.8rem; color: #a0a0c0;">Claim</div>
                     </div>
                 </div>
             </div>
             
-            <div style="text-align: center; color: #666680; font-size: 0.8rem; margin-top: 15px;">
+            <div style="text-align: center; color: #666680; font-size: 0.9rem; margin-top: 15px;">
                 <i class="fas fa-lock"></i> Bonus locked - cannot be changed
             </div>
         </div>
     </div>
     
     <footer>
-        &copy; <span id="currentYear"></span> Milt+T. 18+ Only.
+        &copy; <span id="currentYear"></span> Milt+T Gaming. 18+ Only.
     </footer>
 
     <script>
@@ -529,14 +437,14 @@
             const totalRotation = 1080 + centerOffset + sectionDegrees;
             
             // Apply spinning
-            wheel.style.transition = 'transform 3.5s cubic-bezier(0.1, 0.2, 0.3, 1)';
+            wheel.style.transition = 'transform 3s cubic-bezier(0.1, 0.2, 0.3, 1)';
             wheel.style.transform = `rotate(${totalRotation}deg)`;
             
             // Reveal bonus
             setTimeout(() => {
                 isSpinning = false;
                 revealBonus(selectedBonus);
-            }, 3800);
+            }, 3000);
         }
         
         function revealBonus(bonusId) {
@@ -579,23 +487,7 @@
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
         // Mobile optimization
-        document.addEventListener('touchstart', function(e) {
-            if (e.touches.length > 1) e.preventDefault();
-        }, { passive: false });
-        
-        // Prevent zoom
-        document.addEventListener('gesturestart', function(e) {
-            e.preventDefault();
-        });
-        
-        // Fix for mobile keyboards
-        window.addEventListener('resize', function() {
-            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
-                window.setTimeout(function() {
-                    document.activeElement.scrollIntoView({ block: 'center' });
-                }, 100);
-            }
-        });
+        document.addEventListener('touchstart', function() {}, {passive: true});
     </script>
 </body>
 </html>
