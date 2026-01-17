@@ -8,244 +8,188 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
-font-family:Segoe UI,Arial;
-background:radial-gradient(circle at top,#1b1b2f,#070711);
-color:#fff;
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px
+    font-family:Segoe UI,Tahoma,sans-serif;
+    background:radial-gradient(circle at center,#0b0b1d,#02020a);
+    color:#fff;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
-.container{text-align:center;width:100%;max-width:850px}
 
-/* HEADER */
+.container{text-align:center;width:100%;max-width:700px}
+
 .logo{
-font-size:4rem;
-font-weight:900;
-background:linear-gradient(45deg,#FFD700,#FF9F00);
--webkit-background-clip:text;
-color:transparent;
-margin-bottom:10px
-}
-.instructions{color:#cbd5e1;font-size:1.1rem}
-.warning{
-margin-top:15px;
-display:inline-block;
-padding:10px 26px;
-border-radius:50px;
-border:1px solid rgba(255,215,0,.4);
-color:#FFD700;
-font-weight:700
+    font-size:4rem;
+    font-weight:900;
+    background:linear-gradient(45deg,#ffd700,#ff9f1c);
+    -webkit-background-clip:text;
+    color:transparent;
+    margin-bottom:10px;
 }
 
-/* WHEEL */
+.instructions{color:#cbd5e1;margin-bottom:30px}
+
 .wheel-container{
-margin:40px auto;
-width:min(90vw,420px);
-height:min(90vw,420px);
-position:relative
+    position:relative;
+    width:360px;
+    height:360px;
+    margin:30px auto;
 }
 
 .pointer{
-position:absolute;
-top:-38px;
-left:50%;
-transform:translateX(-50%);
-width:0;height:0;
-border-left:22px solid transparent;
-border-right:22px solid transparent;
-border-top:42px solid #FFD700;
-filter:drop-shadow(0 6px 10px rgba(0,0,0,.6));
-z-index:10
+    position:absolute;
+    top:-25px;
+    left:50%;
+    transform:translateX(-50%);
+    width:0;height:0;
+    border-left:18px solid transparent;
+    border-right:18px solid transparent;
+    border-top:30px solid #ffd700;
+    z-index:5;
 }
 
 .wheel{
-width:100%;
-height:100%;
-border-radius:50%;
-background:radial-gradient(circle at 30% 30%,#333,#000);
-border:12px solid #2a2a2a;
-box-shadow:
-0 0 80px rgba(255,215,0,.25),
-inset 0 0 60px rgba(0,0,0,.9);
-overflow:hidden;
-position:relative
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    background:#000;
+    padding:12px;
+    box-shadow:0 0 50px rgba(255,215,0,.35);
 }
 
 .wheel-inner{
-width:100%;
-height:100%;
-border-radius:50%;
-transition:transform 3.5s cubic-bezier(.17,.67,.22,.99)
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    background:
+        conic-gradient(
+            #dc2626 0deg 120deg,
+            #10b981 120deg 240deg,
+            #3b82f6 240deg 360deg
+        );
+    transition:transform 3.5s cubic-bezier(.17,.67,.22,.99);
 }
 
-/* SEGMENTS */
-.segment{
-position:absolute;
-width:100%;
-height:100%;
-clip-path:polygon(50% 50%,50% 0%,100% 0%,100% 100%,50% 100%);
-transform-origin:center
-}
-
-.seg1{
-transform:rotate(0deg);
-background:radial-gradient(circle at 30% 30%,#ff6b6b,#b91c1c)
-}
-.seg2{
-transform:rotate(120deg);
-background:radial-gradient(circle at 30% 30%,#34d399,#047857)
-}
-.seg3{
-transform:rotate(240deg);
-background:radial-gradient(circle at 30% 30%,#60a5fa,#1e40af)
-}
-
-/* TEXT */
-.bonus{
-position:absolute;
-font-weight:900;
-text-align:center;
-text-shadow:0 3px 8px rgba(0,0,0,.8);
-width:140px
-}
-.b1{top:28%;left:75%;transform:translate(-50%,-50%) rotate(60deg)}
-.b2{top:78%;left:25%;transform:translate(-50%,-50%) rotate(180deg)}
-.b3{top:28%;left:25%;transform:translate(-50%,-50%) rotate(300deg)}
-.amount{font-size:2.4rem}
-.type{font-size:1.1rem;letter-spacing:1px}
-
-/* CENTER */
 .center{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:110px;height:110px;
-border-radius:50%;
-background:radial-gradient(circle at top,#222,#000);
-border:8px solid #FFD700;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:900;
-color:#FFD700;
-box-shadow:
-0 0 30px rgba(255,215,0,.8),
-inset 0 0 25px rgba(255,215,0,.4)
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:90px;height:90px;
+    border-radius:50%;
+    background:radial-gradient(circle,#000,#222);
+    border:6px solid #ffd700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    color:#ffd700;
+    z-index:3;
 }
 
-/* BUTTON */
 .spin-btn{
-margin:35px auto;
-padding:22px 60px;
-font-size:1.4rem;
-font-weight:900;
-border:none;
-border-radius:14px;
-cursor:pointer;
-background:linear-gradient(45deg,#FFD700,#FF8C00);
-color:#000;
-box-shadow:0 10px 30px rgba(255,215,0,.4)
+    margin-top:30px;
+    padding:18px 50px;
+    font-size:1.3rem;
+    font-weight:900;
+    background:linear-gradient(45deg,#ffd700,#ff9f1c);
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
 }
-.spin-btn:disabled{opacity:.6}
 
-/* RESULT */
+.spin-btn:disabled{opacity:.6;cursor:not-allowed}
+
 .result{
-display:none;
-margin-top:40px;
-background:rgba(0,0,0,.5);
-border-radius:20px;
-padding:35px;
-border:2px solid rgba(255,215,0,.3)
+    display:none;
+    margin-top:30px;
+    background:rgba(0,0,0,.6);
+    border:2px solid rgba(255,215,0,.3);
+    border-radius:18px;
+    padding:25px;
 }
+
 .result.show{display:block}
-.row{
-display:flex;
-justify-content:space-between;
-padding:14px 0;
-border-bottom:1px solid rgba(255,255,255,.1)
+
+.result h2{color:#ffd700;margin-bottom:20px}
+
+.result-row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid rgba(255,255,255,.1);
 }
-.row:last-child{border:none}
+.result-row:last-child{border-bottom:none}
+
+@media(max-width:600px){
+    .wheel-container{width:300px;height:300px}
+}
 </style>
 </head>
 
 <body>
 <div class="container">
+
 <h1 class="logo">Milk+T</h1>
-<p class="instructions">Spin once and unlock your bonus</p>
-<div class="warning">🎰 ONE SPIN PER PLAYER</div>
+<p class="instructions">One spin only. Screenshot to claim.</p>
 
 <div class="wheel-container">
-<div class="pointer"></div>
-<div class="wheel">
-<div class="wheel-inner" id="wheel">
-
-<div class="segment seg1">
-<div class="bonus b1">
-<div class="amount">150%</div>
-<div class="type">BONUS</div>
-</div>
+    <div class="pointer"></div>
+    <div class="wheel">
+        <div class="wheel-inner" id="wheel"></div>
+    </div>
+    <div class="center">Milk+T</div>
 </div>
 
-<div class="segment seg2">
-<div class="bonus b2">
-<div class="amount">70%</div>
-<div class="type">BONUS</div>
-</div>
-</div>
-
-<div class="segment seg3">
-<div class="bonus b3">
-<div class="amount">100%</div>
-<div class="type">BONUS</div>
-</div>
-</div>
-
-</div>
-<div class="center">Milk+T</div>
-</div>
-</div>
-
-<button class="spin-btn" id="spinBtn"><i class="fas fa-dice"></i> SPIN TO WIN</button>
+<button class="spin-btn" id="spinBtn">
+    <i class="fas fa-dice"></i> SPIN
+</button>
 
 <div class="result" id="result">
-<h2 id="resTitle">🎰 YOU WON 🎰</h2>
-<div class="row"><span>Bonus</span><span id="r1"></span></div>
-<div class="row"><span>Deposit</span><span id="r2"></span></div>
-<div class="row"><span>Safety</span><span id="r3"></span></div>
-<div class="row"><span>Redeem</span><span id="r4"></span></div>
+    <h2 id="resultTitle">🎰 YOU WON 🎰</h2>
+    <div id="resultDetails"></div>
 </div>
+
 </div>
 
 <script>
 const prizes=[
-{t:"150% MEGA BONUS",d:"$5-$15",s:"5 FREE PLAYS",r:"$250"},
-{t:"70% PREMIUM BONUS",d:"$10-$40",s:"$10 CASHBACK",r:"$300"},
-{t:"100% SAFE BONUS",d:"$5-$15",s:"50% CASHBACK",r:"$300"}
+ {title:"150% MEGA BONUS",deposit:"$5–$15",lose:"5 FREE PLAYS",redeem:"$250"},
+ {title:"70% PREMIUM BONUS",deposit:"$10–$40",lose:"$10 CASHBACK",redeem:"$300"},
+ {title:"100% SAFE BONUS",deposit:"$5–$15",lose:"50% CASHBACK",redeem:"$300"}
 ];
 
-let spun=false,rot=0;
+let spinning=false,used=false,rotation=0;
 const wheel=document.getElementById("wheel");
 const btn=document.getElementById("spinBtn");
 const res=document.getElementById("result");
+const resDetails=document.getElementById("resultDetails");
+const resTitle=document.getElementById("resultTitle");
 
 btn.onclick=()=>{
-if(spun){alert("One spin only");return}
-spun=true;btn.disabled=true;
-const i=Math.floor(Math.random()*3);
-const deg=360*6+i*120+Math.random()*30;
-rot+=deg;
-wheel.style.transform=`rotate(${rot}deg)`;
-setTimeout(()=>{
-document.getElementById("r1").innerText=prizes[i].t;
-document.getElementById("r2").innerText=prizes[i].d;
-document.getElementById("r3").innerText=prizes[i].s;
-document.getElementById("r4").innerText=prizes[i].r;
-res.classList.add("show");
-},3500);
+ if(spinning||used)return;
+ spinning=true;used=true;
+ btn.disabled=true;
+
+ const pick=Math.floor(Math.random()*3);
+ const angle=(pick*120)+1440+(Math.random()*40);
+ rotation+=angle;
+ wheel.style.transform=`rotate(${rotation}deg)`;
+
+ setTimeout(()=>{
+   const p=prizes[pick];
+   resTitle.textContent=p.title;
+   resDetails.innerHTML=`
+     <div class="result-row"><span>Deposit</span><b>${p.deposit}</b></div>
+     <div class="result-row"><span>If Lose</span><b>${p.lose}</b></div>
+     <div class="result-row"><span>Redeem</span><b>${p.redeem}</b></div>
+     <div class="result-row"><span>Cashout</span><b>INSTANT</b></div>
+   `;
+   res.classList.add("show");
+   spinning=false;
+ },3500);
 };
 </script>
 </body>
