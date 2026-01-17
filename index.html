@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milt+T - Spin & Win Bonus</title>
+    <title>Milt+T - Spin The Wheel & Win Bonus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            background: linear-gradient(145deg, #0d1b2a, #1b263b, #0d1b2a);
             color: white;
             min-height: 100vh;
             padding: 20px;
@@ -27,60 +28,116 @@
         
         .container {
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border-radius: 25px;
-            padding: 35px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px 35px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
             text-align: center;
+            margin: 20px auto;
         }
         
+        /* HEADER */
         .header {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
         
         .logo {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             font-weight: 900;
-            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f);
+            background: linear-gradient(45deg, #ff9a00, #ff5e00, #ff9a00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             letter-spacing: 2px;
+            text-shadow: 0 5px 20px rgba(255, 154, 0, 0.3);
         }
         
         .tagline {
-            font-size: 1.2rem;
-            color: #b8c1ec;
+            font-size: 1.3rem;
+            color: #a0b9d9;
             font-weight: 300;
             letter-spacing: 3px;
+            margin-bottom: 5px;
         }
         
-        .instruction {
-            font-size: 1.3rem;
+        .subtitle {
+            font-size: 1.1rem;
+            color: #7a9bc8;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        /* INSTRUCTION BOX */
+        .instruction-box {
+            background: linear-gradient(135deg, rgba(255, 154, 0, 0.1), rgba(255, 94, 0, 0.1));
+            border-radius: 20px;
+            padding: 25px;
+            margin: 35px auto;
+            max-width: 800px;
+            border: 2px solid rgba(255, 154, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .instruction-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff9a00, #ff5e00);
+        }
+        
+        .instruction-text {
+            font-size: 1.4rem;
             color: #fff;
-            margin: 30px 0;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 15px;
-            border-left: 5px solid #ffd93d;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .instruction-note {
+            font-size: 1rem;
+            color: #a0b9d9;
+            font-style: italic;
         }
         
         /* WHEEL CONTAINER */
-        .wheel-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            margin: 30px auto;
+        .wheel-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-        @media (max-width: 500px) {
+        .wheel-container {
+            position: relative;
+            width: 450px;
+            height: 450px;
+            margin: 0 auto 40px;
+        }
+        
+        @media (max-width: 600px) {
             .wheel-container {
-                width: 300px;
-                height: 300px;
+                width: 320px;
+                height: 320px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .wheel-container {
+                width: 280px;
+                height: 280px;
             }
         }
         
@@ -90,46 +147,65 @@
             position: relative;
             border-radius: 50%;
             overflow: hidden;
-            border: 10px solid #2d4059;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-            transition: transform 3s cubic-bezier(0.17, 0.67, 0.21, 0.99);
+            border: 15px solid #1e3a5f;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.7),
+                        inset 0 0 30px rgba(0, 0, 0, 0.5);
+            transition: transform 3.5s cubic-bezier(0.2, 0.8, 0.3, 1);
         }
         
-        .wheel-section {
+        .wheel-section-area {
             position: absolute;
             width: 100%;
             height: 100%;
             clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 50%);
             transform-origin: 50% 50%;
             display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding-left: 30%;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding-left: 25%;
             box-sizing: border-box;
+            transition: all 0.3s;
         }
         
-        .section-1 {
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+        .wheel-section-area:hover {
+            filter: brightness(1.1);
+        }
+        
+        .gold-section {
+            background: linear-gradient(135deg, #ffd700, #ff9a00);
             transform: rotate(0deg);
         }
         
-        .section-2 {
-            background: linear-gradient(45deg, #6bcf7f, #8de39e);
+        .silver-section {
+            background: linear-gradient(135deg, #c0c0c0, #8a8a8a);
             transform: rotate(120deg);
         }
         
-        .section-3 {
-            background: linear-gradient(45deg, #4d96ff, #6babff);
+        .platinum-section {
+            background: linear-gradient(135deg, #e5e4e2, #b8b8b8);
             transform: rotate(240deg);
         }
         
-        .section-text {
-            transform: rotate(90deg);
-            font-weight: bold;
-            font-size: 1.4rem;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            white-space: nowrap;
+        .section-label {
+            transform: rotate(60deg);
+            text-align: left;
+            width: 120px;
+        }
+        
+        .section-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e3a5f;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+        }
+        
+        .section-tag {
+            font-size: 1rem;
+            color: #1e3a5f;
+            font-weight: 600;
+            opacity: 0.9;
         }
         
         .wheel-center {
@@ -137,77 +213,120 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: #2d4059;
+            width: 100px;
+            height: 100px;
+            background: #1e3a5f;
             border-radius: 50%;
-            border: 8px solid #ffd93d;
+            border: 10px solid #ff9a00;
             z-index: 10;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 0 20px rgba(255, 217, 61, 0.5);
-        }
-        
-        .spin-btn {
-            background: linear-gradient(45deg, #ffd93d, #ffb347);
-            color: #1a1a2e;
-            border: none;
-            padding: 18px 45px;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: 800;
+            font-weight: 900;
+            font-size: 1.4rem;
+            box-shadow: 0 0 30px rgba(255, 154, 0, 0.6);
             cursor: pointer;
-            margin-top: 40px;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            box-shadow: 0 10px 25px rgba(255, 217, 61, 0.4);
-            letter-spacing: 1px;
         }
         
-        .spin-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 30px rgba(255, 217, 61, 0.6);
+        .wheel-center:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 154, 0, 0.8);
         }
         
-        .spin-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
+        .wheel-center:active {
+            transform: translate(-50%, -50%) scale(0.95);
         }
         
         .pointer {
             position: absolute;
-            top: -30px;
+            top: -40px;
             left: 50%;
             transform: translateX(-50%);
-            width: 40px;
-            height: 60px;
-            background: #ff6b6b;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            width: 50px;
+            height: 80px;
+            background: #ff5e00;
+            clip-path: polygon(50% 0%, 20% 100%, 80% 100%);
             z-index: 20;
-            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.4));
         }
         
-        /* BONUS REVEAL */
+        .pointer::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #ff9a00;
+            clip-path: polygon(50% 0%, 20% 100%, 80% 100%);
+        }
+        
+        /* SPIN BUTTON */
+        .spin-btn {
+            background: linear-gradient(135deg, #ff9a00, #ff5e00);
+            color: white;
+            border: none;
+            padding: 22px 60px;
+            border-radius: 60px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin: 20px 0 40px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            box-shadow: 0 15px 35px rgba(255, 94, 0, 0.4);
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spin-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .spin-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 94, 0, 0.6);
+        }
+        
+        .spin-btn:hover::before {
+            left: 100%;
+        }
+        
+        .spin-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        /* BONUS REVEAL SECTION */
         .reveal-section {
             display: none;
             margin-top: 50px;
-            padding: 35px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            border: 3px solid #ffd93d;
-            animation: fadeIn 0.8s ease;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.9), rgba(20, 40, 70, 0.95));
+            border-radius: 25px;
+            border: 3px solid #ff9a00;
+            animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
@@ -215,204 +334,341 @@
             display: block;
         }
         
-        .reveal-title {
-            font-size: 2.2rem;
-            color: #ffd93d;
-            margin-bottom: 25px;
+        .reveal-header {
+            font-size: 2.5rem;
+            color: #ff9a00;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            text-shadow: 0 2px 10px rgba(255, 154, 0, 0.3);
+        }
+        
+        .bonus-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bonus-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff9a00, #ff5e00);
+        }
+        
+        .bonus-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .bonus-detail-item {
+            padding: 18px 25px;
+            margin: 15px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            border-left: 4px solid #ff9a00;
+        }
+        
+        .bonus-detail-item:hover {
+            background: rgba(0, 0, 0, 0.3);
+            transform: translateX(10px);
+        }
+        
+        .bonus-detail-item i {
+            color: #ff9a00;
+            font-size: 1.3rem;
+            width: 30px;
+        }
+        
+        /* SCREENSHOT SECTION */
+        .screenshot-section {
+            background: linear-gradient(135deg, rgba(255, 94, 0, 0.15), rgba(255, 154, 0, 0.15));
+            border-radius: 20px;
+            padding: 30px;
+            margin: 35px 0;
+            border: 2px solid rgba(255, 94, 0, 0.3);
+            text-align: center;
+        }
+        
+        .screenshot-title {
+            font-size: 1.8rem;
+            color: #ff5e00;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 20px;
         }
         
-        .bonus-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            border-radius: 15px;
-            padding: 30px;
+        .screenshot-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
             margin: 25px 0;
-            border: 2px solid rgba(255, 255, 255, 0.2);
         }
         
-        .bonus-name {
-            font-size: 1.8rem;
-            color: #ffd93d;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .bonus-detail {
-            padding: 15px;
-            margin: 12px 0;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
+        .step {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 15px;
-            font-size: 1.1rem;
-            border-left: 4px solid #ff6b6b;
         }
         
-        .bonus-detail i {
-            color: #ffd93d;
-            font-size: 1.2rem;
-            width: 30px;
-        }
-        
-        .screenshot-box {
-            background: linear-gradient(90deg, rgba(255, 107, 107, 0.2), rgba(255, 217, 61, 0.2));
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px 0;
-            text-align: center;
-            font-size: 1.4rem;
-            border-left: 5px solid #ff6b6b;
-        }
-        
-        .confetti {
-            position: fixed;
-            width: 15px;
-            height: 15px;
-            background: #ffd93d;
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: #ff9a00;
             border-radius: 50%;
-            opacity: 0;
-            z-index: 1000;
-            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e3a5f;
         }
         
+        /* FOOTER */
         footer {
-            margin-top: 40px;
-            color: #7a86b6;
-            font-size: 0.9rem;
+            margin-top: 50px;
+            color: #7a9bc8;
+            font-size: 0.95rem;
             text-align: center;
-            padding-top: 20px;
+            padding-top: 25px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             width: 100%;
+            line-height: 1.6;
         }
         
-        /* ANIMATIONS */
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes celebrate {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .celebrate {
-            animation: celebrate 0.5s ease 3;
-        }
-        
+        /* RESPONSIVE */
         @media (max-width: 768px) {
+            .container {
+                padding: 30px 25px;
+                border-radius: 25px;
+            }
+            
+            .logo {
+                font-size: 3rem;
+            }
+            
+            .instruction-box {
+                padding: 20px;
+            }
+            
+            .instruction-text {
+                font-size: 1.2rem;
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .spin-btn {
+                padding: 20px 40px;
+                font-size: 1.3rem;
+            }
+            
+            .reveal-header {
+                font-size: 2rem;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .bonus-title {
+                font-size: 1.7rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .screenshot-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 10px;
+            }
+            
             .container {
                 padding: 25px 20px;
             }
             
             .logo {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
             }
             
-            .wheel-container {
-                width: 320px;
-                height: 320px;
-            }
-            
-            .spin-btn {
-                padding: 16px 35px;
+            .wheel-center {
+                width: 80px;
+                height: 80px;
                 font-size: 1.2rem;
             }
             
-            .reveal-title {
-                font-size: 1.8rem;
-                flex-direction: column;
-                gap: 10px;
+            .spin-btn {
+                padding: 18px 30px;
+                font-size: 1.2rem;
             }
+        }
+        
+        /* CONFETTI */
+        .confetti-piece {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            opacity: 0;
+            z-index: 1000;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- HEADER -->
         <div class="header">
             <h1 class="logo">MILT+T</h1>
-            <p class="tagline">SPIN TO WIN YOUR BONUS</p>
+            <p class="tagline">PREMIUM GAMING EXPERIENCE</p>
+            <p class="subtitle">Spin the wheel to claim your exclusive bonus offer</p>
         </div>
         
-        <div class="instruction">
-            🎡 <strong>SPIN THE WHEEL TO REVEAL YOUR EXCLUSIVE BONUS!</strong><br>
-            <small style="color: #b8c1ec;">One spin, one bonus - let luck decide!</small>
+        <!-- INSTRUCTION -->
+        <div class="instruction-box">
+            <div class="instruction-text">
+                <i class="fas fa-gift fa-2x" style="color: #ff9a00;"></i>
+                <span><strong>SPIN THE WHEEL TO REVEAL YOUR BONUS</strong></span>
+                <i class="fas fa-gift fa-2x" style="color: #ff9a00;"></i>
+            </div>
+            <p class="instruction-note">One spin per user. Your bonus will be locked after selection.</p>
         </div>
         
         <!-- WHEEL SECTION -->
-        <div class="wheel-container">
-            <div class="pointer"></div>
-            <div class="wheel" id="wheel">
-                <div class="wheel-section section-1">
-                    <div class="section-text">BONUS 1</div>
-                </div>
-                <div class="wheel-section section-2">
-                    <div class="section-text">BONUS 2</div>
-                </div>
-                <div class="wheel-section section-3">
-                    <div class="section-text">BONUS 3</div>
-                </div>
-                <div class="wheel-center">
-                    SPIN!
+        <div class="wheel-section">
+            <div class="wheel-container">
+                <div class="pointer"></div>
+                <div class="wheel" id="wheel">
+                    <!-- GOLD SECTION -->
+                    <div class="wheel-section-area gold-section">
+                        <div class="section-label">
+                            <div class="section-name">GOLD</div>
+                            <div class="section-tag">Premium Bonus</div>
+                        </div>
+                    </div>
+                    
+                    <!-- SILVER SECTION -->
+                    <div class="wheel-section-area silver-section">
+                        <div class="section-label">
+                            <div class="section-name">SILVER</div>
+                            <div class="section-tag">Value Pack</div>
+                        </div>
+                    </div>
+                    
+                    <!-- PLATINUM SECTION -->
+                    <div class="wheel-section-area platinum-section">
+                        <div class="section-label">
+                            <div class="section-name">PLATINUM</div>
+                            <div class="section-tag">Elite Reward</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wheel-center" onclick="spinWheel()">
+                        SPIN
+                    </div>
                 </div>
             </div>
+            
+            <button class="spin-btn" id="spinBtn" onclick="spinWheel()">
+                <i class="fas fa-redo-alt"></i>
+                <span>SPIN THE WHEEL</span>
+            </button>
         </div>
-        
-        <button class="spin-btn" id="spinBtn" onclick="spinWheel()">
-            <i class="fas fa-redo"></i> SPIN THE WHEEL
-        </button>
         
         <!-- REVEAL SECTION -->
         <div class="reveal-section" id="revealSection">
-            <h2 class="reveal-title">
-                <i class="fas fa-trophy"></i>
+            <h2 class="reveal-header">
+                <i class="fas fa-crown" style="color: #ff9a00;"></i>
                 <span>CONGRATULATIONS!</span>
-                <i class="fas fa-trophy"></i>
+                <i class="fas fa-crown" style="color: #ff9a00;"></i>
             </h2>
             
             <div class="bonus-card" id="bonusCard">
                 <!-- Bonus will appear here -->
             </div>
             
-            <div class="screenshot-box">
-                <i class="fas fa-camera fa-2x"></i>
-                <div style="margin-top: 10px;">
-                    <strong>📸 TAKE SCREENSHOT NOW!</strong><br>
-                    Send this to our support team to claim your bonus
+            <div class="screenshot-section">
+                <h3 class="screenshot-title">
+                    <i class="fas fa-camera"></i>
+                    <span>HOW TO CLAIM YOUR BONUS</span>
+                </h3>
+                
+                <div class="screenshot-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div><strong>Take Screenshot</strong></div>
+                        <small>Capture this screen</small>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div><strong>Send to Support</strong></div>
+                        <small>Share with our team</small>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div><strong>Claim Bonus</strong></div>
+                        <small>Get your reward instantly</small>
+                    </div>
                 </div>
             </div>
             
-            <div style="text-align: center; color: #b8c1ec; margin-top: 20px;">
-                <i class="fas fa-lock"></i> Your bonus has been locked in
+            <div style="text-align: center; color: #a0b9d9; margin-top: 25px; padding: 15px; background: rgba(255, 255, 255, 0.03); border-radius: 15px;">
+                <i class="fas fa-lock"></i> Your selection has been locked in. Cannot be changed.
             </div>
         </div>
     </div>
     
     <footer>
-        &copy; <span id="currentYear"></span> Milt+T Gaming Platform. For players 18+ only.
+        &copy; <span id="currentYear"></span> Milt+T Gaming Platform. For players 18+ only.<br>
+        <small style="opacity: 0.8; display: block; margin-top: 10px;">This is a promotional offer. Terms and conditions apply.</small>
     </footer>
 
     <script>
-        // Bonus data - SHUFFLED for Milt+T
-        const bonuses = [
-            {
-                title: "🎰 100% DEPOSIT BONUS",
-                color: "#4d96ff",
+        // Bonus data for each section
+        const bonuses = {
+            gold: {
+                title: "👑 GOLD BONUS - 70% HIGH ROLLER",
+                icon: "👑",
+                color: "#ffd700",
                 details: [
-                    "100% Bonus on next Deposit $5 – $15",
-                    "50% Cashback if you lose",
+                    "70% Bonus on next Deposit $10 – $40",
+                    "$10 Cashback if you lose",
                     "Redeem up to $300",
                     "Instant Cashout"
                 ]
             },
-            {
-                title: "💰 50% + FREE PLAY BONUS",
-                color: "#6bcf7f",
+            silver: {
+                title: "💰 SILVER BONUS - 50% + FREE PLAY",
+                icon: "💰",
+                color: "#c0c0c0",
                 details: [
                     "50% Bonus on next Deposit $5 – $15",
                     "5 Free Plays if you lose",
@@ -420,18 +676,20 @@
                     "Instant Cashout"
                 ]
             },
-            {
-                title: "👑 70% HIGH ROLLER BONUS",
-                color: "#ff6b6b",
+            platinum: {
+                title: "💎 PLATINUM BONUS - 100% DEPOSIT",
+                icon: "💎",
+                color: "#e5e4e2",
                 details: [
-                    "70% Bonus on next Deposit $10 – $40",
-                    "$10 Cashback if you lose",
+                    "100% Bonus on next Deposit $5 – $15",
+                    "50% Cashback if you lose",
                     "Redeem up to $300",
                     "Instant Cashout"
                 ]
             }
-        ];
+        };
         
+        const sectionOrder = ['gold', 'silver', 'platinum'];
         let isSpinning = false;
         let hasSpun = false;
         
@@ -440,95 +698,150 @@
             
             isSpinning = true;
             const spinBtn = document.getElementById('spinBtn');
-            spinBtn.disabled = true;
-            spinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> SPINNING...';
-            
-            // Random rotation (3 full rotations + bonus section)
-            const bonusIndex = Math.floor(Math.random() * 3); // 0, 1, or 2
-            const extraDegrees = bonusIndex * 120; // 0°, 120°, or 240°
-            const totalRotation = 1080 + extraDegrees; // 3 full rotations + bonus section
-            
             const wheel = document.getElementById('wheel');
+            
+            // Disable button and show spinning
+            spinBtn.disabled = true;
+            spinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>SPINNING...</span>';
+            
+            // Random selection
+            const selectedIndex = Math.floor(Math.random() * 3); // 0, 1, or 2
+            const selectedSection = sectionOrder[selectedIndex];
+            
+            // Calculate rotation (3 full spins + section position)
+            const sectionDegrees = selectedIndex * 120; // 0°, 120°, or 240°
+            const totalRotation = 1080 + 60 + sectionDegrees; // 3 spins + 60° offset to center section
+            
+            // Apply rotation with smooth easing
+            wheel.style.transition = 'transform 3.5s cubic-bezier(0.2, 0.8, 0.3, 1)';
             wheel.style.transform = `rotate(${totalRotation}deg)`;
             
-            // After spin completes
+            // Add slight wobble effect at the end
+            setTimeout(() => {
+                wheel.style.transition = 'transform 0.3s ease';
+                wheel.style.transform = `rotate(${totalRotation + 5}deg)`;
+                
+                setTimeout(() => {
+                    wheel.style.transform = `rotate(${totalRotation - 5}deg)`;
+                    
+                    setTimeout(() => {
+                        wheel.style.transform = `rotate(${totalRotation}deg)`;
+                    }, 100);
+                }, 100);
+            }, 3500);
+            
+            // Reveal bonus after spin
             setTimeout(() => {
                 isSpinning = false;
-                revealBonus(bonusIndex);
+                revealBonus(selectedSection);
                 createConfetti();
-            }, 3000);
+            }, 3800);
         }
         
-        function revealBonus(index) {
-            const bonus = bonuses[index];
+        function revealBonus(section) {
+            const bonus = bonuses[section];
             const bonusCard = document.getElementById('bonusCard');
             
             bonusCard.innerHTML = `
-                <h3 class="bonus-name">${bonus.title}</h3>
+                <h3 class="bonus-title" style="color: ${bonus.color}">
+                    ${bonus.icon} ${bonus.title}
+                </h3>
                 ${bonus.details.map(detail => `
-                    <div class="bonus-detail">
+                    <div class="bonus-detail-item">
                         <i class="fas fa-check-circle"></i>
                         <span>${detail}</span>
                     </div>
                 `).join('')}
             `;
             
-            // Show reveal section with animation
+            // Show reveal section
             const revealSection = document.getElementById('revealSection');
             revealSection.classList.add('show');
             
-            // Add celebration animation
-            bonusCard.classList.add('celebrate');
-            
             // Scroll to reveal section
             setTimeout(() => {
-                revealSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                revealSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center'
+                });
             }, 500);
             
-            // Show screenshot alert
+            // Show screenshot instructions
             setTimeout(() => {
-                alert("🎉 BONUS REVEALED!\n\n📸 Please take a screenshot NOW\n\nSend the screenshot to Milt+T support team\n\nClaim your bonus within 24 hours!");
+                alert("🎉 BONUS REVEALED!\n\n📸 IMPORTANT: Take a screenshot NOW\n\n📱 Mobile: Volume Up + Power Button\n💻 PC: Press 'PrtScn' key\n\nSend screenshot to Milt+T support team to claim your bonus!");
             }, 800);
             
             hasSpun = true;
         }
         
         function createConfetti() {
-            const colors = ['#ffd93d', '#ff6b6b', '#4d96ff', '#6bcf7f'];
+            const colors = ['#ff9a00', '#ff5e00', '#ffd700', '#c0c0c0', '#e5e4e2'];
+            const types = ['circle', 'rect', 'triangle'];
             
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 120; i++) {
                 const confetti = document.createElement('div');
-                confetti.className = 'confetti';
+                confetti.className = 'confetti-piece';
+                
+                const type = types[Math.floor(Math.random() * types.length)];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Position
                 confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.top = '-20px';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.top = '-30px';
+                confetti.style.backgroundColor = color;
+                
+                // Shape
+                if (type === 'circle') {
+                    confetti.style.borderRadius = '50%';
+                    confetti.style.width = Math.random() * 20 + 8 + 'px';
+                    confetti.style.height = confetti.style.width;
+                } else if (type === 'rect') {
+                    confetti.style.width = Math.random() * 25 + 10 + 'px';
+                    confetti.style.height = Math.random() * 15 + 5 + 'px';
+                    confetti.style.borderRadius = '3px';
+                } else {
+                    // Triangle
+                    confetti.style.width = '0';
+                    confetti.style.height = '0';
+                    confetti.style.backgroundColor = 'transparent';
+                    confetti.style.borderLeft = '10px solid transparent';
+                    confetti.style.borderRight = '10px solid transparent';
+                    confetti.style.borderBottom = `20px solid ${color}`;
+                }
+                
                 confetti.style.opacity = '1';
-                confetti.style.width = Math.random() * 15 + 5 + 'px';
-                confetti.style.height = confetti.style.width;
                 document.body.appendChild(confetti);
                 
                 // Animation
-                confetti.animate([
-                    { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
-                    { transform: `translate(${Math.random() * 100 - 50}px, 100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                const animation = confetti.animate([
+                    { 
+                        transform: `translate(0, 0) rotate(0deg)`, 
+                        opacity: 1 
+                    },
+                    { 
+                        transform: `translate(${Math.random() * 200 - 100}px, 110vh) rotate(${Math.random() * 720}deg)`, 
+                        opacity: 0 
+                    }
                 ], {
-                    duration: Math.random() * 3000 + 2000,
+                    duration: Math.random() * 4000 + 2000,
                     easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
                 });
                 
                 // Remove after animation
-                setTimeout(() => confetti.remove(), 5000);
+                animation.onfinish = () => confetti.remove();
             }
         }
         
         // Set current year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
-        // Add click sound effect (optional)
-        function playSpinSound() {
-            // You can add actual sound here if needed
-            console.log("Spin sound played");
-        }
+        // Prevent zoom on mobile
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        });
+        
+        // Touch device optimization
+        document.addEventListener('touchstart', function() {}, {passive: true});
     </script>
 </body>
 </html>
