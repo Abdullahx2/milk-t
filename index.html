@@ -1,737 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milk+T | Premium Casino Wheel</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milk+T | Premium Casino Wheel</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a14 0%, #1a1a2e 100%);
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
-            padding: 20px;
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Segoe UI,Arial;
+background:radial-gradient(circle at top,#1b1b2f,#070711);
+color:#fff;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px
+}
+.container{text-align:center;width:100%;max-width:850px}
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+/* HEADER */
+.logo{
+font-size:4rem;
+font-weight:900;
+background:linear-gradient(45deg,#FFD700,#FF9F00);
+-webkit-background-clip:text;
+color:transparent;
+margin-bottom:10px
+}
+.instructions{color:#cbd5e1;font-size:1.1rem}
+.warning{
+margin-top:15px;
+display:inline-block;
+padding:10px 26px;
+border-radius:50px;
+border:1px solid rgba(255,215,0,.4);
+color:#FFD700;
+font-weight:700
+}
 
-        /* CASINO HEADER */
-        .header {
-            margin-bottom: 40px;
-        }
+/* WHEEL */
+.wheel-container{
+margin:40px auto;
+width:min(90vw,420px);
+height:min(90vw,420px);
+position:relative
+}
 
-        .logo {
-            font-size: 4.5rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, #FFD700, #FFA500, #FF8C00);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
-            position: relative;
-        }
+.pointer{
+position:absolute;
+top:-38px;
+left:50%;
+transform:translateX(-50%);
+width:0;height:0;
+border-left:22px solid transparent;
+border-right:22px solid transparent;
+border-top:42px solid #FFD700;
+filter:drop-shadow(0 6px 10px rgba(0,0,0,.6));
+z-index:10
+}
 
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, #FFD700, transparent);
-            border-radius: 2px;
-        }
+.wheel{
+width:100%;
+height:100%;
+border-radius:50%;
+background:radial-gradient(circle at 30% 30%,#333,#000);
+border:12px solid #2a2a2a;
+box-shadow:
+0 0 80px rgba(255,215,0,.25),
+inset 0 0 60px rgba(0,0,0,.9);
+overflow:hidden;
+position:relative
+}
 
-        .instructions {
-            color: #d1d5db;
-            font-size: 1.2rem;
-            max-width: 500px;
-            margin: 25px auto 20px;
-            line-height: 1.6;
-        }
+.wheel-inner{
+width:100%;
+height:100%;
+border-radius:50%;
+transition:transform 3.5s cubic-bezier(.17,.67,.22,.99)
+}
 
-        .warning {
-            color: #FFD700;
-            font-weight: 700;
-            background: rgba(255, 215, 0, 0.1);
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: 1rem;
-            display: inline-block;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            margin-top: 15px;
-        }
+/* SEGMENTS */
+.segment{
+position:absolute;
+width:100%;
+height:100%;
+clip-path:polygon(50% 50%,50% 0%,100% 0%,100% 100%,50% 100%);
+transform-origin:center
+}
 
-        /* PROFESSIONAL CASINO WHEEL */
-        .wheel-container {
-            position: relative;
-            width: min(90vw, 420px);
-            height: min(90vw, 420px);
-            margin: 30px auto;
-        }
+.seg1{
+transform:rotate(0deg);
+background:radial-gradient(circle at 30% 30%,#ff6b6b,#b91c1c)
+}
+.seg2{
+transform:rotate(120deg);
+background:radial-gradient(circle at 30% 30%,#34d399,#047857)
+}
+.seg3{
+transform:rotate(240deg);
+background:radial-gradient(circle at 30% 30%,#60a5fa,#1e40af)
+}
 
-        .wheel {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 
-                0 0 80px rgba(255, 215, 0, 0.25),
-                inset 0 0 60px rgba(0, 0, 0, 0.8);
-            border: 10px solid rgba(255, 215, 0, 0.2);
-            background: #0d0d1a;
-        }
+/* TEXT */
+.bonus{
+position:absolute;
+font-weight:900;
+text-align:center;
+text-shadow:0 3px 8px rgba(0,0,0,.8);
+width:140px
+}
+.b1{top:28%;left:75%;transform:translate(-50%,-50%) rotate(60deg)}
+.b2{top:78%;left:25%;transform:translate(-50%,-50%) rotate(180deg)}
+.b3{top:28%;left:25%;transform:translate(-50%,-50%) rotate(300deg)}
+.amount{font-size:2.4rem}
+.type{font-size:1.1rem;letter-spacing:1px}
 
-        .wheel-inner {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            transition: transform 3.5s cubic-bezier(0.17, 0.67, 0.22, 0.99);
-        }
+/* CENTER */
+.center{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:110px;height:110px;
+border-radius:50%;
+background:radial-gradient(circle at top,#222,#000);
+border:8px solid #FFD700;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+color:#FFD700;
+box-shadow:
+0 0 30px rgba(255,215,0,.8),
+inset 0 0 25px rgba(255,215,0,.4)
+}
 
-        /* PERFECT WHEEL SECTIONS - CASINO STYLE */
-        .wheel-section {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%);
-            transform-origin: center;
-        }
+/* BUTTON */
+.spin-btn{
+margin:35px auto;
+padding:22px 60px;
+font-size:1.4rem;
+font-weight:900;
+border:none;
+border-radius:14px;
+cursor:pointer;
+background:linear-gradient(45deg,#FFD700,#FF8C00);
+color:#000;
+box-shadow:0 10px 30px rgba(255,215,0,.4)
+}
+.spin-btn:disabled{opacity:.6}
 
-        /* CASINO COLORS */
-        .section1 { 
-            transform: rotate(0deg); 
-            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
-            border-right: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .section2 { 
-            transform: rotate(120deg); 
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-            border-right: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .section3 { 
-            transform: rotate(240deg); 
-            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
-            border-right: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* PROFESSIONAL WHEEL CENTER */
-        .wheel-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 110px;
-            height: 110px;
-            background: linear-gradient(135deg, #000, #222, #000);
-            border-radius: 50%;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 
-                0 0 40px rgba(255, 215, 0, 0.7),
-                inset 0 0 30px rgba(255, 215, 0, 0.4);
-            border: 8px solid #FFD700;
-        }
-
-        .wheel-center span {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #FFD700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
-        }
-
-        /* CASINO POINTER */
-        .pointer {
-            position: absolute;
-            top: -45px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 70px;
-            z-index: 20;
-            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
-        }
-
-        .pointer:before {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 25px solid transparent;
-            border-right: 25px solid transparent;
-            border-top: 50px solid #FFD700;
-            border-bottom: 10px solid transparent;
-        }
-
-        /* BONUS TEXT - CASINO STYLE */
-        .bonus-text {
-            position: absolute;
-            top: 30%;
-            left: 75%;
-            transform: translate(-50%, -50%) rotate(60deg);
-            text-align: center;
-            color: white;
-            font-weight: 900;
-            font-size: 1.8rem;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-            z-index: 5;
-            width: 140px;
-        }
-
-        .bonus-text.section2 {
-            top: 80%;
-            left: 25%;
-            transform: translate(-50%, -50%) rotate(180deg);
-        }
-
-        .bonus-text.section3 {
-            top: 30%;
-            left: 25%;
-            transform: translate(-50%, -50%) rotate(300deg);
-        }
-
-        .bonus-amount {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-
-        .bonus-type {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* SECTION DIVIDERS */
-        .divider {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 2px;
-            height: 45%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0.2));
-            transform-origin: top center;
-            z-index: 2;
-        }
-
-        .divider1 { transform: translate(-50%, -50%) rotate(0deg); }
-        .divider2 { transform: translate(-50%, -50%) rotate(120deg); }
-        .divider3 { transform: translate(-50%, -50%) rotate(240deg); }
-
-        /* SPIN BUTTON - CASINO STYLE */
-        .spin-btn {
-            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00);
-            color: #000;
-            border: none;
-            padding: 24px 65px;
-            font-size: 1.5rem;
-            font-weight: 900;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin: 35px auto;
-            box-shadow: 
-                0 10px 30px rgba(255, 215, 0, 0.3),
-                inset 0 -4px 10px rgba(0, 0, 0, 0.2);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .spin-btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: 0.5s;
-        }
-
-        .spin-btn:hover:before {
-            left: 100%;
-        }
-
-        .spin-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
-        }
-
-        .spin-btn:active {
-            transform: translateY(0);
-        }
-
-        .spin-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        /* RESULT DISPLAY */
-        .result-display {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 140, 0, 0.08));
-            border-radius: 25px;
-            padding: 40px 35px;
-            margin: 40px 0;
-            width: 100%;
-            max-width: 500px;
-            border: 3px solid rgba(255, 215, 0, 0.2);
-            backdrop-filter: blur(10px);
-            display: none;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-        }
-
-        .result-display.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-title {
-            font-size: 2.8rem;
-            color: #FFD700;
-            margin-bottom: 30px;
-            font-weight: 900;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-        }
-
-        .result-details {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
-            text-align: left;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .result-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 18px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .result-row:last-child {
-            border-bottom: none;
-        }
-
-        .result-label {
-            color: #cbd5e1;
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-
-        .result-value {
-            color: white;
-            font-weight: 800;
-            font-size: 1.3rem;
-        }
-
-        .screenshot-instruction {
-            color: #FFD700;
-            font-weight: 800;
-            margin-top: 35px;
-            padding: 22px;
-            background: rgba(255, 215, 0, 0.1);
-            border-radius: 15px;
-            font-size: 1.3rem;
-            border: 2px dashed rgba(255, 215, 0, 0.3);
-        }
-
-        /* SCREENSHOT BUTTON */
-        .screenshot-btn {
-            background: linear-gradient(135deg, #10B981, #059669);
-            color: white;
-            border: none;
-            padding: 22px 50px;
-            font-size: 1.4rem;
-            font-weight: 900;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .screenshot-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.5);
-        }
-
-        /* FOOTER */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 60px;
-            color: #94a3b8;
-            font-size: 0.95rem;
-            width: 100%;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 600px) {
-            .logo {
-                font-size: 3.2rem;
-            }
-            
-            .wheel-container {
-                width: 85vw;
-                height: 85vw;
-                max-width: 360px;
-            }
-            
-            .wheel-center {
-                width: 90px;
-                height: 90px;
-            }
-            
-            .wheel-center span {
-                font-size: 1.6rem;
-            }
-            
-            .bonus-text {
-                font-size: 1.5rem;
-                width: 120px;
-            }
-            
-            .bonus-amount {
-                font-size: 2rem;
-            }
-            
-            .bonus-type {
-                font-size: 1rem;
-            }
-            
-            .spin-btn {
-                padding: 22px 50px;
-                font-size: 1.3rem;
-            }
-            
-            .result-display {
-                padding: 30px 25px;
-            }
-            
-            .result-title {
-                font-size: 2.2rem;
-            }
-            
-            .result-label, .result-value {
-                font-size: 1.1rem;
-            }
-        }
-    </style>
+/* RESULT */
+.result{
+display:none;
+margin-top:40px;
+background:rgba(0,0,0,.5);
+border-radius:20px;
+padding:35px;
+border:2px solid rgba(255,215,0,.3)
+}
+.result.show{display:block}
+.row{
+display:flex;
+justify-content:space-between;
+padding:14px 0;
+border-bottom:1px solid rgba(255,255,255,.1)
+}
+.row:last-child{border:none}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <!-- HEADER -->
-        <div class="header">
-            <h1 class="logo">Milk+T</h1>
-            <p class="instructions">
-                Spin the premium casino wheel to win exclusive bonuses! 
-                One spin only - make it count!
-            </p>
-            <div class="warning">
-                🎰 REAL CASINO EXPERIENCE • ONE SPIN PER PLAYER
-            </div>
-        </div>
+<div class="container">
+<h1 class="logo">Milk+T</h1>
+<p class="instructions">Spin once and unlock your bonus</p>
+<div class="warning">🎰 ONE SPIN PER PLAYER</div>
 
-        <!-- PROFESSIONAL CASINO WHEEL -->
-        <div class="wheel-container">
-            <div class="pointer"></div>
-            <div class="wheel">
-                <div class="wheel-inner" id="wheel">
-                    <!-- 3 premium casino sections -->
-                    <div class="wheel-section section1">
-                        <div class="bonus-text section1">
-                            <div class="bonus-amount">150%</div>
-                            <div class="bonus-type">BONUS</div>
-                        </div>
-                    </div>
-                    <div class="wheel-section section2">
-                        <div class="bonus-text section2">
-                            <div class="bonus-amount">70%</div>
-                            <div class="bonus-type">BONUS</div>
-                        </div>
-                    </div>
-                    <div class="wheel-section section3">
-                        <div class="bonus-text section3">
-                            <div class="bonus-amount">100%</div>
-                            <div class="bonus-type">BONUS</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Clean dividers -->
-                    <div class="divider divider1"></div>
-                    <div class="divider divider2"></div>
-                    <div class="divider divider3"></div>
-                </div>
-                <div class="wheel-center">
-                    <span>Milk+T</span>
-                </div>
-            </div>
-        </div>
+<div class="wheel-container">
+<div class="pointer"></div>
+<div class="wheel">
+<div class="wheel-inner" id="wheel">
 
-        <!-- SPIN BUTTON -->
-        <button class="spin-btn" id="spinBtn">
-            <i class="fas fa-dice"></i>
-            SPIN TO WIN
-        </button>
+<div class="segment seg1">
+<div class="bonus b1">
+<div class="amount">150%</div>
+<div class="type">BONUS</div>
+</div>
+</div>
 
-        <!-- RESULT DISPLAY -->
-        <div class="result-display" id="resultDisplay">
-            <h2 class="result-title" id="resultTitle">🎰 JACKPOT WIN! 🎰</h2>
-            <div class="result-details" id="resultDetails">
-                <!-- Filled by JavaScript -->
-            </div>
-            <p class="screenshot-instruction">
-                📸 <strong>CASINO RULES:</strong> Screenshot this result and send to claim your prize!
-            </p>
-            <button class="screenshot-btn" onclick="takeScreenshot()">
-                <i class="fas fa-camera"></i>
-                CAPTURE & CLAIM
-            </button>
-        </div>
+<div class="segment seg2">
+<div class="bonus b2">
+<div class="amount">70%</div>
+<div class="type">BONUS</div>
+</div>
+</div>
 
-        <!-- FOOTER -->
-        <div class="footer">
-            <p>© 2024 Milk+T Premium Casino Platform. All rights reserved.</p>
-            <p style="margin-top: 10px; color: #d1d5db;">18+ Only | Play Responsibly | Professional Casino Experience</p>
-        </div>
-    </div>
+<div class="segment seg3">
+<div class="bonus b3">
+<div class="amount">100%</div>
+<div class="type">BONUS</div>
+</div>
+</div>
 
-    <script>
-        // 3 CASINO PRIZES
-        const prizes = [
-            { 
-                type: "150% MEGA BONUS",
-                deposit: "$5 - $15",
-                ifLose: "5 FREE PLAYS",
-                redeem: "$250",
-                color: "#DC2626",
-                description: "MEGA JACKPOT"
-            },
-            { 
-                type: "70% PREMIUM BONUS",
-                deposit: "$10 - $40",
-                ifLose: "$10 CASHBACK",
-                redeem: "$300",
-                color: "#10B981",
-                description: "PREMIUM WIN"
-            },
-            { 
-                type: "100% SAFE BONUS",
-                deposit: "$5 - $15",
-                ifLose: "50% CASHBACK",
-                redeem: "$300",
-                color: "#3B82F6",
-                description: "SAFE WIN"
-            }
-        ];
+</div>
+<div class="center">Milk+T</div>
+</div>
+</div>
 
-        // Casino wheel logic
-        let isSpinning = false;
-        let hasSpun = false;
-        let currentRotation = 0;
-        const wheel = document.getElementById('wheel');
-        const spinBtn = document.getElementById('spinBtn');
-        const resultDisplay = document.getElementById('resultDisplay');
-        const resultTitle = document.getElementById('resultTitle');
-        const resultDetails = document.getElementById('resultDetails');
+<button class="spin-btn" id="spinBtn"><i class="fas fa-dice"></i> SPIN TO WIN</button>
 
-        spinBtn.addEventListener('click', spinWheel);
+<div class="result" id="result">
+<h2 id="resTitle">🎰 YOU WON 🎰</h2>
+<div class="row"><span>Bonus</span><span id="r1"></span></div>
+<div class="row"><span>Deposit</span><span id="r2"></span></div>
+<div class="row"><span>Safety</span><span id="r3"></span></div>
+<div class="row"><span>Redeem</span><span id="r4"></span></div>
+</div>
+</div>
 
-        function spinWheel() {
-            if (isSpinning) return;
-            if (hasSpun) {
-                alert("🎰 CASINO RULE: One spin only! Screenshot your win and send to claim.");
-                return;
-            }
-            
-            isSpinning = true;
-            hasSpun = true;
-            spinBtn.disabled = true;
-            spinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> WHEEL SPINNING...';
-            
-            resultDisplay.classList.remove('show');
-            
-            // Casino-style random stop
-            const extraSpins = 6;
-            const randomPrizeIndex = Math.floor(Math.random() * prizes.length);
-            const targetAngle = (randomPrizeIndex * 120) + (extraSpins * 360);
-            const finalRotation = currentRotation + targetAngle + (Math.random() * 40 - 20);
-            
-            // Smooth casino animation
-            wheel.style.transform = `rotate(${finalRotation}deg)`;
-            currentRotation = finalRotation % 360;
-            
-            // Add casino sound effect
-            playCasinoSound();
-            
-            setTimeout(() => {
-                isSpinning = false;
-                spinBtn.innerHTML = '<i class="fas fa-trophy"></i> SPIN COMPLETE';
-                
-                showResult(prizes[randomPrizeIndex]);
-            }, 3500);
-        }
+<script>
+const prizes=[
+{t:"150% MEGA BONUS",d:"$5-$15",s:"5 FREE PLAYS",r:"$250"},
+{t:"70% PREMIUM BONUS",d:"$10-$40",s:"$10 CASHBACK",r:"$300"},
+{t:"100% SAFE BONUS",d:"$5-$15",s:"50% CASHBACK",r:"$300"}
+];
 
-        function showResult(prize) {
-            resultTitle.textContent = `🎰 ${prize.description} 🎰`;
-            resultDetails.innerHTML = `
-                <div class="result-row">
-                    <span class="result-label">Bonus Type:</span>
-                    <span class="result-value" style="color: ${prize.color}">${prize.type}</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">Deposit Range:</span>
-                    <span class="result-value" style="color: ${prize.color}">${prize.deposit}</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">If You Lose:</span>
-                    <span class="result-value" style="color: ${prize.color}">${prize.ifLose}</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">Redeem Up To:</span>
-                    <span class="result-value" style="color: ${prize.color}">${prize.redeem}</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">Cashout:</span>
-                    <span class="result-value" style="color: #10B981; font-weight: 900;">INSTANT</span>
-                </div>
-            `;
-            
-            resultDisplay.classList.add('show');
-            resultDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            createCasinoConfetti(prize.color);
-        }
+let spun=false,rot=0;
+const wheel=document.getElementById("wheel");
+const btn=document.getElementById("spinBtn");
+const res=document.getElementById("result");
 
-        function takeScreenshot() {
-            if (!hasSpun) {
-                alert("🎲 Spin the wheel first to win a prize!");
-                return;
-            }
-            
-            const currentPrize = prizes.find(p => p.description === resultTitle.textContent.replace(/🎰/g, '').trim());
-            
-            const message = `📸 CASINO CLAIM INSTRUCTIONS\n\n` +
-                          `1. CAPTURE screenshot of your win\n` +
-                          `2. SEND screenshot to us\n` +
-                          `3. INCLUDE your username\n` +
-                          `4. PRIZE activated immediately!\n\n` +
-                          `🎰 WIN: ${currentPrize.type}\n` +
-                          `💰 BET: ${currentPrize.deposit}\n` +
-                          `🛡️ SAFETY: ${currentPrize.ifLose}\n` +
-                          `💎 REDEEM: ${currentPrize.redeem}\n` +
-                          `⚡ CASHOUT: INSTANT\n\n` +
-                          `✅ Screenshot & send to claim!`;
-            
-            alert(message);
-        }
-
-        function playCasinoSound() {
-            // Casino wheel sound simulation
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
-                oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.5);
-                
-                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
-                
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.8);
-            } catch (e) {
-                // Audio not supported
-            }
-        }
-
-        function createCasinoConfetti(color) {
-            const confettiCount = 50;
-            const casinoEmojis = ['💰', '🎰', '🎲', '🃏', '♠️', '♥️', '♦️', '♣️', '🏆', '⭐'];
-            
-            for (let i = 0; i < confettiCount; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.fontSize = '1.8rem';
-                confetti.textContent = casinoEmojis[Math.floor(Math.random() * casinoEmojis.length)];
-                confetti.style.color = color;
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.top = '-50px';
-                confetti.style.zIndex = '9999';
-                confetti.style.pointerEvents = 'none';
-                confetti.style.textShadow = `0 0 15px ${color}`;
-                confetti.style.fontWeight = 'bold';
-                
-                const animation = confetti.animate([
-                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-                    { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
-                ], {
-                    duration: Math.random() * 2000 + 1500,
-                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
-                });
-                
-                document.body.appendChild(confetti);
-                animation.onfinish = () => confetti.remove();
-            }
-        }
-
-        // Initialize
-        wheel.style.transform = `rotate(${currentRotation}deg)`;
-    </script>
+btn.onclick=()=>{
+if(spun){alert("One spin only");return}
+spun=true;btn.disabled=true;
+const i=Math.floor(Math.random()*3);
+const deg=360*6+i*120+Math.random()*30;
+rot+=deg;
+wheel.style.transform=`rotate(${rot}deg)`;
+setTimeout(()=>{
+document.getElementById("r1").innerText=prizes[i].t;
+document.getElementById("r2").innerText=prizes[i].d;
+document.getElementById("r3").innerText=prizes[i].s;
+document.getElementById("r4").innerText=prizes[i].r;
+res.classList.add("show");
+},3500);
+};
+</script>
 </body>
 </html>
