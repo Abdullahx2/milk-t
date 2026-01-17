@@ -2,161 +2,124 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Milt+T - Premium Wheel Bonus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* RESET & BASE */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             -webkit-tap-highlight-color: transparent;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
         }
         
         body {
-            background: #0f0f18;
+            background: #0a0a12;
             color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.4;
             min-height: 100vh;
-            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
+            padding: 15px;
+            position: relative;
         }
         
-        /* CONTAINER - RESPONSIVE FIX */
+        /* MAIN CONTAINER - FIXED WIDTH FOR MOBILE */
         .container {
             width: 100%;
-            max-width: 1100px;
-            background: linear-gradient(145deg, #1a1a24, #13131d);
-            border-radius: 32px;
-            padding: 40px 30px;
+            max-width: 500px;
+            background: linear-gradient(165deg, #141420, #0f0f18);
+            border-radius: 20px;
+            padding: 25px 20px;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             position: relative;
-            overflow: hidden;
-            margin: 20px auto;
-            box-sizing: border-box;
+            margin: 0 auto;
         }
         
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 20px;
-                margin: 10px;
-                width: calc(100% - 20px);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 25px 15px;
-                margin: 5px;
-                width: calc(100% - 10px);
-            }
-        }
-        
-        /* NEON BORDER */
-        .neon-border {
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, 
-                #ff0080, #ff8c00, #40e0d0, #ff0080);
-            border-radius: 34px;
-            z-index: -1;
-            opacity: 0.3;
-            filter: blur(10px);
-        }
-        
-        /* HEADER */
+        /* HEADER - COMPACT */
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            width: 100%;
+            margin-bottom: 25px;
         }
         
         .logo {
-            font-size: clamp(2.8rem, 8vw, 4.2rem);
+            font-size: 2.5rem;
             font-weight: 900;
             background: linear-gradient(135deg, #ff0080, #ff8c00, #40e0d0);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            text-shadow: 0 0 30px rgba(255, 0, 128, 0.3);
-            word-wrap: break-word;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
         }
         
         .tagline {
-            font-size: clamp(1rem, 4vw, 1.4rem);
+            font-size: 1rem;
             color: #a0a0c0;
             font-weight: 300;
-            letter-spacing: 2px;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
             padding: 0 10px;
         }
         
         /* INSTRUCTION */
         .instruction {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            padding: 20px 25px;
-            margin: 30px auto;
-            max-width: 700px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 20px 0;
             text-align: center;
-            backdrop-filter: blur(10px);
-            width: 100%;
-            box-sizing: border-box;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .instruction-text {
-            font-size: clamp(1rem, 4vw, 1.4rem);
-            font-weight: 500;
+            font-size: 1.1rem;
             color: #40e0d0;
-            margin-bottom: 10px;
+            font-weight: 500;
+            margin-bottom: 6px;
         }
         
-        /* WHEEL CONTAINER - RESPONSIVE FIX */
+        /* WHEEL SECTION - COMPACT */
         .wheel-section {
-            margin: 40px 0;
-            padding: 30px 20px;
+            margin: 25px 0;
+            padding: 20px 15px;
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 28px;
+            border-radius: 18px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            width: 100%;
-            box-sizing: border-box;
         }
         
         .wheel-wrapper {
             position: relative;
-            width: min(500px, 90vw);
-            height: min(500px, 90vw);
+            width: 280px;
+            height: 280px;
             margin: 0 auto;
-            max-width: 500px;
-            max-height: 500px;
         }
         
-        /* WHEEL DESIGN */
+        /* WHEEL */
         .wheel {
             width: 100%;
             height: 100%;
             position: relative;
             border-radius: 50%;
             overflow: hidden;
-            border: 15px solid #252535;
+            border: 10px solid #1e1e2e;
             box-shadow: 
-                0 0 60px rgba(0, 0, 0, 0.8),
-                inset 0 0 50px rgba(0, 0, 0, 0.6);
-            transition: transform 4s cubic-bezier(0.1, 0.2, 0.3, 1);
-            will-change: transform;
+                0 0 30px rgba(0, 0, 0, 0.7),
+                inset 0 0 25px rgba(0, 0, 0, 0.5);
+            transition: transform 3.5s cubic-bezier(0.1, 0.2, 0.3, 1);
+            transform-origin: center;
         }
         
         .wheel-section-part {
@@ -169,8 +132,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding-left: 25%;
-            box-sizing: border-box;
+            padding-left: 20%;
         }
         
         .section-1 {
@@ -188,21 +150,20 @@
             transform: rotate(240deg);
         }
         
-        /* EMOJIS ON COLORS */
+        /* EMOJIS ON WHEEL */
         .section-emoji {
-            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            font-size: 2.2rem;
             transform: rotate(60deg);
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+            margin-bottom: 8px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
         
         .section-text {
             transform: rotate(60deg);
-            font-size: clamp(1rem, 4vw, 1.2rem);
+            font-size: 0.85rem;
             font-weight: 700;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
             white-space: nowrap;
         }
         
@@ -212,107 +173,70 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(80px, 20vw, 120px);
-            height: clamp(80px, 20vw, 120px);
-            background: #252535;
+            width: 70px;
+            height: 70px;
+            background: #1e1e2e;
             border-radius: 50%;
-            border: 10px solid #ff0080;
+            border: 6px solid #ff0080;
             z-index: 10;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 900;
-            font-size: clamp(1rem, 4vw, 1.5rem);
-            box-shadow: 0 0 40px rgba(255, 0, 128, 0.6);
-            cursor: pointer;
-            transition: all 0.3s;
+            font-size: 1rem;
+            box-shadow: 0 0 25px rgba(255, 0, 128, 0.5);
         }
         
-        .wheel-center:hover {
-            transform: translate(-50%, -50%) scale(1.05);
-            box-shadow: 0 0 50px rgba(255, 0, 128, 0.8);
-        }
-        
-        /* ARROW POINTER - NEW BETTER DESIGN */
+        /* ARROW */
         .pointer {
             position: absolute;
-            top: -35px;
+            top: -25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 50px;
-            height: 70px;
+            width: 30px;
+            height: 45px;
             background: #ff0080;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
             z-index: 20;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
         }
         
-        .pointer::before {
+        .pointer::after {
             content: '';
             position: absolute;
-            top: 5px;
+            top: 3px;
             left: 50%;
             transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
+            width: 12px;
+            height: 12px;
             background: #40e0d0;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
         
-        .pointer::after {
-            content: '⬇️';
-            position: absolute;
-            top: 75px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.5rem;
-            color: #ff8c00;
-            text-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
-        }
-        
         /* SPIN BUTTON */
         .spin-btn {
-            background: linear-gradient(135deg, #ff0080, #ff8c00, #40e0d0);
+            background: linear-gradient(135deg, #ff0080, #ff8c00);
             color: white;
             border: none;
-            padding: clamp(18px, 5vw, 25px) clamp(40px, 10vw, 70px);
-            border-radius: 60px;
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
             font-weight: 800;
             cursor: pointer;
-            margin: 40px auto 30px;
-            transition: all 0.3s;
-            display: inline-flex;
+            margin: 25px auto 15px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
-            box-shadow: 0 20px 50px rgba(255, 0, 128, 0.4);
-            letter-spacing: 2px;
-            position: relative;
-            overflow: hidden;
-            width: auto;
-            max-width: 400px;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(255, 0, 128, 0.3);
+            width: 100%;
+            max-width: 300px;
+            transition: transform 0.2s;
         }
         
-        .spin-btn::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
-            border-radius: 62px;
-            z-index: -1;
-            opacity: 0.5;
-            filter: blur(20px);
-        }
-        
-        .spin-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 60px rgba(255, 0, 128, 0.6);
+        .spin-btn:active {
+            transform: scale(0.98);
         }
         
         .spin-btn:disabled {
@@ -324,19 +248,16 @@
         /* REVEAL SECTION */
         .reveal-section {
             display: none;
-            margin-top: 40px;
-            padding: 30px 25px;
-            background: linear-gradient(145deg, rgba(30, 30, 40, 0.9), rgba(20, 20, 30, 0.95));
-            border-radius: 28px;
+            margin-top: 30px;
+            padding: 25px 20px;
+            background: linear-gradient(165deg, rgba(30, 30, 40, 0.9), rgba(20, 20, 30, 0.95));
+            border-radius: 18px;
             border: 2px solid #40e0d0;
-            animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9);
-            width: 100%;
-            box-sizing: border-box;
+            animation: fadeIn 0.5s ease;
         }
         
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
@@ -345,208 +266,211 @@
         }
         
         .reveal-title {
-            font-size: clamp(1.8rem, 6vw, 2.8rem);
+            font-size: 1.8rem;
             text-align: center;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, #ff0080, #ff8c00, #40e0d0);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            color: #40e0d0;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
         
         .bonus-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 30px 25px;
-            margin: 25px 0;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
-            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 15px;
+            padding: 25px 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
         
         .bonus-name {
-            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            font-size: 1.5rem;
             font-weight: 800;
-            color: #40e0d0;
-            margin-bottom: 25px;
+            color: #ff8c00;
+            margin-bottom: 20px;
             text-align: center;
         }
         
         .bonus-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
         
-        .detail-box {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 16px;
-            padding: 20px;
-            border-left: 5px solid #ff0080;
-            box-sizing: border-box;
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            font-size: 1rem;
         }
         
-        .detail-title {
-            color: #ff8c00;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 8px;
+        .detail-item i {
+            color: #ff0080;
+            width: 20px;
         }
         
-        .detail-text {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-        
-        /* SCREENSHOT SECTION */
-        .screenshot-section {
+        /* SCREENSHOT */
+        .screenshot-box {
             background: linear-gradient(135deg, rgba(255, 0, 128, 0.1), rgba(64, 224, 208, 0.1));
-            border-radius: 24px;
-            padding: 30px 25px;
-            margin: 35px 0;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
             text-align: center;
-            border: 2px solid rgba(255, 0, 128, 0.2);
-            width: 100%;
-            box-sizing: border-box;
+            border-left: 4px solid #ff0080;
         }
         
         .screenshot-title {
-            font-size: clamp(1.3rem, 5vw, 2rem);
+            font-size: 1.3rem;
             color: #ff8c00;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 12px;
         }
         
         /* FOOTER */
         footer {
-            margin-top: 40px;
+            margin-top: 25px;
             color: #666680;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-align: center;
-            padding-top: 25px;
+            padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             width: 100%;
-            line-height: 1.6;
+        }
+        
+        /* RESPONSIVE FIXES */
+        @media (max-width: 400px) {
+            .container {
+                padding: 20px 15px;
+                border-radius: 18px;
+            }
+            
+            .wheel-wrapper {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .section-emoji {
+                font-size: 1.8rem;
+            }
+            
+            .section-text {
+                font-size: 0.75rem;
+            }
+            
+            .wheel-center {
+                width: 60px;
+                height: 60px;
+                font-size: 0.9rem;
+            }
+            
+            .spin-btn {
+                padding: 16px 30px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* PREVENT ZOOM */
+        @media screen and (max-width: 768px) {
+            body {
+                touch-action: manipulation;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="neon-border"></div>
-        
         <!-- HEADER -->
         <div class="header">
             <h1 class="logo">MILT+T</h1>
-            <p class="tagline">Spin the wheel to reveal your exclusive bonus</p>
+            <p class="tagline">Spin the wheel for exclusive bonus</p>
         </div>
         
         <!-- INSTRUCTION -->
         <div class="instruction">
-            <p class="instruction-text">
-                Click "SPIN THE WHEEL" to reveal your random bonus
-            </p>
-            <p style="color: #a0a0c0; margin-top: 10px; font-size: clamp(0.9rem, 3vw, 1rem);">
-                One spin per user. Bonus will be locked after selection.
-            </p>
+            <p class="instruction-text">Spin to reveal your bonus</p>
+            <p style="color: #a0a0c0; font-size: 0.9rem;">One spin per user. Bonus locked after selection.</p>
         </div>
         
         <!-- WHEEL SECTION -->
         <div class="wheel-section">
             <div class="wheel-wrapper">
-                <!-- NEW BETTER ARROW -->
                 <div class="pointer"></div>
                 
                 <div class="wheel" id="wheel">
-                    <!-- SECTION 1 - WITH EMOJI -->
+                    <!-- SECTION 1 -->
                     <div class="wheel-section-part section-1">
                         <div class="section-emoji">🎮</div>
                         <div class="section-text">FREE PLAYS</div>
                     </div>
                     
-                    <!-- SECTION 2 - WITH EMOJI -->
+                    <!-- SECTION 2 -->
                     <div class="wheel-section-part section-2">
                         <div class="section-emoji">💰</div>
                         <div class="section-text">CASHBACK</div>
                     </div>
                     
-                    <!-- SECTION 3 - WITH EMOJI -->
+                    <!-- SECTION 3 -->
                     <div class="wheel-section-part section-3">
                         <div class="section-emoji">👑</div>
                         <div class="section-text">HIGH ROLLER</div>
                     </div>
                     
-                    <div class="wheel-center" onclick="spinWheel()">
-                        SPIN
-                    </div>
+                    <div class="wheel-center">SPIN</div>
                 </div>
             </div>
             
             <div style="text-align: center;">
                 <button class="spin-btn" id="spinBtn" onclick="spinWheel()">
                     <i class="fas fa-redo-alt"></i>
-                    <span>SPIN THE WHEEL</span>
+                    SPIN WHEEL
                 </button>
             </div>
         </div>
         
         <!-- REVEAL SECTION -->
         <div class="reveal-section" id="revealSection">
-            <h2 class="reveal-title">
-                <i class="fas fa-trophy"></i>
-                <span>BONUS REVEALED!</span>
-                <i class="fas fa-trophy"></i>
-            </h2>
+            <h2 class="reveal-title">🎉 BONUS REVEALED!</h2>
             
             <div class="bonus-card" id="bonusCard">
                 <!-- Bonus will appear here -->
             </div>
             
-            <div class="screenshot-section">
+            <div class="screenshot-box">
                 <h3 class="screenshot-title">
                     <i class="fas fa-camera"></i>
-                    <span>TAKE SCREENSHOT</span>
+                    TAKE SCREENSHOT
                 </h3>
-                
-                <p style="font-size: clamp(1rem, 4vw, 1.4rem); color: #a0a0c0; margin-bottom: 20px;">
-                    Capture this screen and send to Milt+T support
+                <p style="color: #a0a0c0; font-size: 1rem; margin-bottom: 15px;">
+                    Send screenshot to support to claim bonus
                 </p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 25px;">
-                    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; text-align: center; box-sizing: border-box;">
-                        <div style="font-size: 1.8rem; color: #ff0080; margin-bottom: 10px;">📸</div>
-                        <div style="font-weight: 600; font-size: 0.9rem;">Screenshot</div>
+                <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; color: #ff0080;">1</div>
+                        <div style="font-size: 0.8rem; color: #a0a0c0;">Screenshot</div>
                     </div>
-                    
-                    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; text-align: center; box-sizing: border-box;">
-                        <div style="font-size: 1.8rem; color: #ff8c00; margin-bottom: 10px;">📤</div>
-                        <div style="font-weight: 600; font-size: 0.9rem;">Send to Support</div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; color: #ff8c00;">2</div>
+                        <div style="font-size: 0.8rem; color: #a0a0c0;">Send</div>
                     </div>
-                    
-                    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; text-align: center; box-sizing: border-box;">
-                        <div style="font-size: 1.8rem; color: #40e0d0; margin-bottom: 10px;">🎁</div>
-                        <div style="font-weight: 600; font-size: 0.9rem;">Claim Bonus</div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; color: #40e0d0;">3</div>
+                        <div style="font-size: 0.8rem; color: #a0a0c0;">Claim</div>
                     </div>
                 </div>
             </div>
             
-            <div style="text-align: center; color: #666680; margin-top: 25px; font-size: 0.9rem;">
+            <div style="text-align: center; color: #666680; font-size: 0.8rem; margin-top: 15px;">
                 <i class="fas fa-lock"></i> Bonus locked - cannot be changed
             </div>
         </div>
     </div>
     
     <footer>
-        &copy; <span id="currentYear"></span> Milt+T Gaming Platform. 18+ Only.
+        &copy; <span id="currentYear"></span> Milt+T. 18+ Only.
     </footer>
 
     <script>
@@ -554,15 +478,8 @@
         const bonuses = {
             1: {
                 name: "50% Bonus + Free Plays 🎮",
-                emoji: "🎮",
-                details: {
-                    deposit: "Deposit $5 – $15",
-                    bonus: "50% Bonus + 5 Free Plays",
-                    redeem: "Redeem up to $250",
-                    cashout: "Instant Cashout"
-                },
-                fullDetails: [
-                    "50% Bonus on next Deposit $5 – $15",
+                details: [
+                    "Deposit $5 – $15",
                     "5 Free Plays if you lose",
                     "Redeem up to $250",
                     "Instant Cashout"
@@ -570,15 +487,8 @@
             },
             2: {
                 name: "70% High Roller Bonus 👑",
-                emoji: "👑",
-                details: {
-                    deposit: "Deposit $10 – $40",
-                    bonus: "70% High Roller Bonus",
-                    redeem: "Redeem up to $300",
-                    cashout: "Instant Cashout"
-                },
-                fullDetails: [
-                    "70% Bonus on next Deposit $10 – $40",
+                details: [
+                    "Deposit $10 – $40",
                     "$10 Cashback if you lose",
                     "Redeem up to $300",
                     "Instant Cashout"
@@ -586,15 +496,8 @@
             },
             3: {
                 name: "100% Deposit Bonus 💰",
-                emoji: "💰",
-                details: {
-                    deposit: "Deposit $5 – $15",
-                    bonus: "100% Deposit Bonus",
-                    redeem: "Redeem up to $300",
-                    cashout: "Instant Cashout"
-                },
-                fullDetails: [
-                    "100% Bonus on next Deposit $5 – $15",
+                details: [
+                    "Deposit $5 – $15",
                     "50% Cashback if you lose",
                     "Redeem up to $300",
                     "Instant Cashout"
@@ -602,7 +505,6 @@
             }
         };
         
-        const sectionOrder = [1, 2, 3];
         let isSpinning = false;
         let hasSpun = false;
         
@@ -615,27 +517,26 @@
             
             // Disable button
             spinBtn.disabled = true;
-            spinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>SPINNING...</span>';
+            spinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> SPINNING...';
             
             // Random selection
             const selectedIndex = Math.floor(Math.random() * 3);
-            const selectedBonus = sectionOrder[selectedIndex];
+            const selectedBonus = selectedIndex + 1;
             
             // Calculate rotation
             const sectionDegrees = selectedIndex * 120;
             const centerOffset = 60;
             const totalRotation = 1080 + centerOffset + sectionDegrees;
             
-            // Apply smooth spinning
-            wheel.style.transition = 'transform 3.8s cubic-bezier(0.1, 0.2, 0.3, 1)';
+            // Apply spinning
+            wheel.style.transition = 'transform 3.5s cubic-bezier(0.1, 0.2, 0.3, 1)';
             wheel.style.transform = `rotate(${totalRotation}deg)`;
             
             // Reveal bonus
             setTimeout(() => {
                 isSpinning = false;
                 revealBonus(selectedBonus);
-                createConfetti();
-            }, 4000);
+            }, 3800);
         }
         
         function revealBonus(bonusId) {
@@ -643,28 +544,14 @@
             const bonusCard = document.getElementById('bonusCard');
             
             bonusCard.innerHTML = `
-                <h3 class="bonus-name">${bonus.emoji} ${bonus.name}</h3>
-                
+                <h3 class="bonus-name">${bonus.name}</h3>
                 <div class="bonus-details">
-                    <div class="detail-box">
-                        <div class="detail-title">DEPOSIT RANGE</div>
-                        <div class="detail-text">${bonus.details.deposit}</div>
-                    </div>
-                    
-                    <div class="detail-box">
-                        <div class="detail-title">BONUS OFFER</div>
-                        <div class="detail-text">${bonus.details.bonus}</div>
-                    </div>
-                    
-                    <div class="detail-box">
-                        <div class="detail-title">REDEMPTION LIMIT</div>
-                        <div class="detail-text">${bonus.details.redeem}</div>
-                    </div>
-                    
-                    <div class="detail-box">
-                        <div class="detail-title">CASHOUT SPEED</div>
-                        <div class="detail-text">${bonus.details.cashout}</div>
-                    </div>
+                    ${bonus.details.map(detail => `
+                        <div class="detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            ${detail}
+                        </div>
+                    `).join('')}
                 </div>
             `;
             
@@ -676,74 +563,39 @@
             setTimeout(() => {
                 revealSection.scrollIntoView({ 
                     behavior: 'smooth', 
-                    block: 'start'
+                    block: 'center'
                 });
-            }, 500);
+            }, 300);
             
             // Show screenshot alert
             setTimeout(() => {
                 alert("🎡 BONUS REVEALED!\n\n📸 Take screenshot and send to support");
-            }, 800);
+            }, 500);
             
             hasSpun = true;
-        }
-        
-        function createConfetti() {
-            const colors = ['#ff0080', '#ff8c00', '#40e0d0'];
-            
-            for (let i = 0; i < 80; i++) {
-                const confetti = document.createElement('div');
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                
-                confetti.style.cssText = `
-                    position: fixed;
-                    width: ${Math.random() * 15 + 5}px;
-                    height: ${Math.random() * 15 + 5}px;
-                    background: ${color};
-                    border-radius: ${Math.random() > 0.5 ? '50%' : '3px'};
-                    top: -50px;
-                    left: ${Math.random() * 100}vw;
-                    opacity: 0;
-                    z-index: 10000;
-                    pointer-events: none;
-                `;
-                
-                document.body.appendChild(confetti);
-                
-                // Animate
-                const animation = confetti.animate([
-                    { transform: 'translate(0, 0) rotate(0deg)', opacity: 0.8 },
-                    { transform: `translate(${Math.random() * 150 - 75}px, ${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
-                ], {
-                    duration: Math.random() * 3000 + 2000,
-                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
-                });
-                
-                // Remove after animation
-                animation.onfinish = () => confetti.remove();
-            }
         }
         
         // Set current year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
         // Mobile optimization
-        document.addEventListener('touchstart', function() {}, {passive: true});
+        document.addEventListener('touchstart', function(e) {
+            if (e.touches.length > 1) e.preventDefault();
+        }, { passive: false });
         
-        // Prevent zoom on mobile
+        // Prevent zoom
         document.addEventListener('gesturestart', function(e) {
             e.preventDefault();
         });
         
-        // Fix for mobile viewport
-        function fixViewport() {
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
-        
-        window.addEventListener('resize', fixViewport);
-        window.addEventListener('orientationchange', fixViewport);
-        fixViewport();
+        // Fix for mobile keyboards
+        window.addEventListener('resize', function() {
+            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+                window.setTimeout(function() {
+                    document.activeElement.scrollIntoView({ block: 'center' });
+                }, 100);
+            }
+        });
     </script>
 </body>
 </html>
