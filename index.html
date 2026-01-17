@@ -14,7 +14,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
             color: #fff;
             min-height: 100vh;
             display: flex;
@@ -40,39 +40,56 @@
         }
 
         .logo {
-            font-size: 3.5rem;
+            font-size: 4.5rem;
             font-weight: 900;
-            background: linear-gradient(45deg, #FFD166, #FF6B6B, #06D6A0);
+            background: linear-gradient(45deg, #FFD700, #FF8C00, #FFD700);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        .instructions {
-            color: #94a3b8;
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin: 0 auto 20px;
-            line-height: 1.5;
-        }
-
-        .warning {
-            color: #FFD166;
-            font-weight: 600;
-            background: rgba(255, 209, 102, 0.1);
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-size: 0.95rem;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            position: relative;
             display: inline-block;
         }
 
-        /* WHEEL CONTAINER */
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+            border-radius: 2px;
+        }
+
+        .instructions {
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            max-width: 500px;
+            margin: 20px auto 20px;
+            line-height: 1.6;
+        }
+
+        .warning {
+            color: #FFD700;
+            font-weight: 700;
+            background: rgba(255, 215, 0, 0.15);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            display: inline-block;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        /* WHEEL CONTAINER - FIXED */
         .wheel-container {
             position: relative;
-            width: min(90vw, 500px);
-            height: min(90vw, 500px);
+            width: min(90vw, 400px);
+            height: min(90vw, 400px);
             margin: 30px auto;
         }
 
@@ -83,10 +100,10 @@
             border-radius: 50%;
             overflow: hidden;
             box-shadow: 
-                0 0 50px rgba(255, 209, 102, 0.2),
-                inset 0 0 30px rgba(0, 0, 0, 0.5);
-            border: 6px solid rgba(255, 255, 255, 0.15);
-            background: #0d1427;
+                0 0 60px rgba(255, 215, 0, 0.3),
+                inset 0 0 40px rgba(0, 0, 0, 0.7);
+            border: 8px solid rgba(255, 215, 0, 0.2);
+            background: #0f0f1f;
         }
 
         .wheel-inner {
@@ -97,38 +114,47 @@
             transition: transform 3s cubic-bezier(0.17, 0.67, 0.22, 0.99);
         }
 
+        /* CORRECT WHEEL SECTIONS - 3 EQUAL PARTS */
         .wheel-section {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            clip-path: polygon(50% 50%, 50% 0%, 100% 0%);
-            transform-origin: 50% 50%;
+            width: 50%;
+            height: 50%;
+            transform-origin: bottom right;
+            left: 0;
+            top: 0;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding-left: 40px;
+            padding-bottom: 20px;
+            box-sizing: border-box;
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
         }
 
+        /* POSITION EACH SECTION AT 0°, 120°, 240° */
+        .section1 { transform: rotate(0deg); }
+        .section2 { transform: rotate(120deg); }
+        .section3 { transform: rotate(240deg); }
+
         .section-content {
-            position: absolute;
-            left: 65%;
-            top: 15%;
             transform: rotate(45deg);
             text-align: center;
             color: white;
-            font-weight: 700;
-            font-size: 1.3rem;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-            width: 100px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            width: 100%;
+            padding-left: 30px;
         }
 
         .prize-amount {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 900;
             margin-bottom: 5px;
         }
 
         .prize-label {
-            font-size: 0.9rem;
+            font-size: 1rem;
             opacity: 0.9;
         }
 
@@ -138,34 +164,35 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #FF6B6B, #FFD166);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
             border-radius: 50%;
             z-index: 10;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 
-                0 0 20px rgba(255, 209, 102, 0.6),
-                inset 0 0 10px rgba(255, 255, 255, 0.3);
-            border: 4px solid white;
+                0 0 25px rgba(255, 215, 0, 0.8),
+                inset 0 0 15px rgba(255, 255, 255, 0.4);
+            border: 6px solid white;
         }
 
         .wheel-center span {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 900;
             color: white;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
         /* POINTER */
         .pointer {
             position: absolute;
-            top: -25px;
+            top: -35px;
             left: 50%;
             transform: translateX(-50%);
-            width: 30px;
-            height: 50px;
+            width: 40px;
+            height: 60px;
             z-index: 20;
         }
 
@@ -174,35 +201,36 @@
             position: absolute;
             width: 0;
             height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-top: 30px solid #FF6B6B;
-            filter: drop-shadow(0 3px 10px rgba(255, 107, 107, 0.5));
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #FF4500;
+            filter: drop-shadow(0 5px 15px rgba(255, 69, 0, 0.5));
         }
 
         /* SPIN BUTTON */
         .spin-btn {
-            background: linear-gradient(135deg, #FF6B6B, #FFD166);
-            color: white;
+            background: linear-gradient(135deg, #FFD700, #FF8C00);
+            color: #000;
             border: none;
-            padding: 20px 50px;
-            font-size: 1.3rem;
-            font-weight: 800;
+            padding: 22px 60px;
+            font-size: 1.4rem;
+            font-weight: 900;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 15px;
             margin: 30px auto;
-            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
-            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .spin-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
         }
 
         .spin-btn:active {
@@ -210,20 +238,20 @@
         }
 
         .spin-btn:disabled {
-            opacity: 0.5;
+            opacity: 0.6;
             cursor: not-allowed;
             transform: none !important;
         }
 
         /* RESULT DISPLAY */
         .result-display {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.1));
+            border-radius: 25px;
+            padding: 35px 30px;
             margin: 30px 0;
             width: 100%;
             max-width: 500px;
-            border: 2px solid rgba(255, 209, 102, 0.2);
+            border: 3px solid rgba(255, 215, 0, 0.3);
             backdrop-filter: blur(10px);
             display: none;
         }
@@ -239,24 +267,25 @@
         }
 
         .result-title {
-            font-size: 2rem;
-            color: #FFD166;
-            margin-bottom: 20px;
-            font-weight: 800;
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin-bottom: 25px;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
         .result-details {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
             text-align: left;
         }
 
         .result-row {
             display: flex;
             justify-content: space-between;
-            padding: 12px 0;
+            padding: 15px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -267,93 +296,95 @@
         .result-label {
             color: #94a3b8;
             font-weight: 500;
+            font-size: 1.1rem;
         }
 
         .result-value {
             color: white;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
         .screenshot-instruction {
-            color: #FFD166;
-            font-weight: 600;
-            margin-top: 25px;
-            padding: 15px;
-            background: rgba(255, 209, 102, 0.1);
-            border-radius: 10px;
-            font-size: 1rem;
+            color: #FFD700;
+            font-weight: 700;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.15);
+            border-radius: 15px;
+            font-size: 1.2rem;
+            border: 2px dashed rgba(255, 215, 0, 0.3);
         }
 
         /* SCREENSHOT BUTTON */
         .screenshot-btn {
-            background: linear-gradient(135deg, #06D6A0, #0CB487);
+            background: linear-gradient(135deg, #32CD32, #228B22);
             color: white;
             border: none;
-            padding: 18px 40px;
-            font-size: 1.1rem;
-            font-weight: 700;
+            padding: 20px 45px;
+            font-size: 1.3rem;
+            font-weight: 800;
             border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin-top: 20px;
-            box-shadow: 0 8px 20px rgba(6, 214, 160, 0.3);
+            gap: 15px;
+            margin-top: 25px;
+            box-shadow: 0 10px 25px rgba(50, 205, 50, 0.3);
+            letter-spacing: 1px;
         }
 
         .screenshot-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(6, 214, 160, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(50, 205, 50, 0.5);
         }
 
         /* FOOTER */
         .footer {
             text-align: center;
-            padding: 30px 20px;
-            margin-top: 40px;
-            color: #64748b;
-            font-size: 0.9rem;
+            padding: 40px 20px;
+            margin-top: 50px;
+            color: #94a3b8;
+            font-size: 0.95rem;
             width: 100%;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* RESPONSIVE */
         @media (max-width: 600px) {
+            .logo {
+                font-size: 3.2rem;
+            }
+            
             .wheel-container {
                 width: 85vw;
                 height: 85vw;
-            }
-            
-            .logo {
-                font-size: 2.8rem;
+                max-width: 350px;
             }
             
             .wheel-center {
-                width: 60px;
-                height: 60px;
+                width: 65px;
+                height: 65px;
             }
             
             .wheel-center span {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
             
             .section-content {
-                left: 60%;
-                top: 12%;
-                font-size: 1.1rem;
-                width: 80px;
+                font-size: 1.2rem;
+                padding-left: 25px;
             }
             
             .prize-amount {
-                font-size: 1.5rem;
+                font-size: 1.7rem;
             }
             
             .spin-btn {
-                padding: 18px 40px;
-                font-size: 1.1rem;
+                padding: 20px 45px;
+                font-size: 1.2rem;
             }
             
             .result-display {
@@ -361,7 +392,7 @@
             }
             
             .result-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
         }
     </style>
@@ -372,15 +403,15 @@
         <div class="header">
             <h1 class="logo">Milk+T</h1>
             <p class="instructions">
-                Spin the wheel to reveal your exclusive bonus! 
-                Only one spin allowed per player.
+                Spin the wheel to win an exclusive bonus! 
+                Only one spin allowed - choose wisely!
             </p>
             <div class="warning">
-                ⚡ Choose carefully - You can only spin once!
+                ⚠️ You can spin only once! Screenshot your result and send to us.
             </div>
         </div>
 
-        <!-- WHEEL -->
+        <!-- WHEEL - FIXED 3 SECTIONS -->
         <div class="wheel-container">
             <div class="pointer"></div>
             <div class="wheel">
@@ -395,43 +426,43 @@
 
         <!-- SPIN BUTTON -->
         <button class="spin-btn" id="spinBtn">
-            <i class="fas fa-sync-alt"></i>
+            <i class="fas fa-play-circle"></i>
             SPIN THE WHEEL
         </button>
 
         <!-- RESULT DISPLAY -->
         <div class="result-display" id="resultDisplay">
-            <h2 class="result-title" id="resultTitle">🎉 YOU WON!</h2>
+            <h2 class="result-title" id="resultTitle">🎉 CONGRATULATIONS!</h2>
             <div class="result-details" id="resultDetails">
                 <!-- Filled by JavaScript -->
             </div>
             <p class="screenshot-instruction">
-                📸 Take a screenshot of this result and send it to support@milkt.com
+                📸 <strong>IMPORTANT:</strong> Take a screenshot of this result and send it to us!
             </p>
             <button class="screenshot-btn" onclick="takeScreenshot()">
                 <i class="fas fa-camera"></i>
-                TAKE SCREENSHOT
+                CAPTURE SCREENSHOT
             </button>
         </div>
 
         <!-- FOOTER -->
         <div class="footer">
-            <p>© 2024 Milk+T. All rights reserved. | 18+ Only | Play Responsibly</p>
-            <p style="margin-top: 10px;">Support: support@milkt.com</p>
+            <p>© 2024 Milk+T Premium Platform. All rights reserved.</p>
+            <p style="margin-top: 10px; color: #cbd5e1;">18+ Only | Play Responsibly</p>
         </div>
     </div>
 
     <script>
-        // ONLY 3 PRIZES as requested
+        // 3 PRIZES ONLY
         const prizes = [
             { 
                 type: "150% BONUS",
                 deposit: "$5 - $15",
                 ifLose: "5 FREE PLAYS",
                 redeem: "$250",
-                color: "#FF6B6B",
-                bgColor: "#FF6B6B",
-                icon: "🎁",
+                color: "#FF4500",
+                bgColor: "#FF4500",
+                icon: "🔥",
                 description: "Mega Bonus"
             },
             { 
@@ -439,8 +470,8 @@
                 deposit: "$10 - $40",
                 ifLose: "$10 CASHBACK",
                 redeem: "$300",
-                color: "#06D6A0",
-                bgColor: "#06D6A0",
+                color: "#32CD32",
+                bgColor: "#32CD32",
                 icon: "💎",
                 description: "Premium Bonus"
             },
@@ -449,23 +480,21 @@
                 deposit: "$5 - $15",
                 ifLose: "50% CASHBACK",
                 redeem: "$300",
-                color: "#FFD166",
-                bgColor: "#FFD166",
+                color: "#FFD700",
+                bgColor: "#FFD700",
                 icon: "🛡️",
                 description: "Safe Bonus"
             }
         ];
 
-        // Create wheel with 3 sections (120° each)
+        // Create wheel with 3 equal sections (120° each)
         const wheel = document.getElementById('wheel');
-        const totalSections = 3;
-        const sectionAngle = 360 / totalSections;
-
+        
+        // Create 3 sections
         prizes.forEach((prize, index) => {
             const section = document.createElement('div');
-            section.className = 'wheel-section';
-            section.style.transform = `rotate(${index * sectionAngle}deg)`;
-            section.style.background = `linear-gradient(135deg, ${prize.bgColor} 0%, ${darkenColor(prize.bgColor, 30)} 100%)`;
+            section.className = `wheel-section section${index + 1}`;
+            section.style.background = `linear-gradient(135deg, ${prize.bgColor} 0%, ${darkenColor(prize.bgColor, 20)} 100%)`;
             
             const content = document.createElement('div');
             content.className = 'section-content';
@@ -473,7 +502,7 @@
                 <div class="prize-amount">${prize.type.split(' ')[0]}</div>
                 <div class="prize-label">${prize.icon}</div>
             `;
-            content.style.color = prize.color === '#FFD166' ? '#000' : '#fff';
+            content.style.color = prize.color === '#FFD700' ? '#000' : '#fff';
             
             section.appendChild(content);
             wheel.appendChild(section);
@@ -493,7 +522,7 @@
         function spinWheel() {
             if (isSpinning) return;
             if (hasSpun) {
-                alert("⚠️ You have already spun the wheel! Take screenshot and send to support.");
+                alert("🚫 You have already spun the wheel! Screenshot your result and send to us.");
                 return;
             }
             
@@ -508,10 +537,12 @@
             // Calculate random stop position
             const extraSpins = 5; // Minimum 5 full spins
             const randomPrizeIndex = Math.floor(Math.random() * prizes.length);
-            const targetAngle = (randomPrizeIndex * sectionAngle) + (extraSpins * 360);
             
-            // Add some randomness
-            const finalRotation = currentRotation + targetAngle + (Math.random() * 30);
+            // Each section is 120°, so target position is prize index * 120°
+            const targetAngle = (randomPrizeIndex * 120) + (extraSpins * 360);
+            
+            // Add some randomness for natural stop
+            const finalRotation = currentRotation + targetAngle + (Math.random() * 30 - 15);
             
             // Animate wheel
             wheel.style.transform = `rotate(${finalRotation}deg)`;
@@ -548,7 +579,7 @@
                 </div>
                 <div class="result-row">
                     <span class="result-label">Cashout:</span>
-                    <span class="result-value" style="color: #06D6A0">INSTANT</span>
+                    <span class="result-value" style="color: #32CD32; font-weight: 900;">INSTANT</span>
                 </div>
             `;
             
@@ -570,41 +601,42 @@
             const currentPrize = prizes.find(p => p.description === resultTitle.textContent.replace('🎉 ', '').replace(' WON!', ''));
             
             const message = `📸 SCREENSHOT INSTRUCTIONS\n\n` +
-                          `1. Take screenshot of your prize result\n` +
-                          `2. Send to: support@milkt.com\n` +
+                          `1. Take a clear screenshot of your prize result\n` +
+                          `2. Send the screenshot to us\n` +
                           `3. Include your username\n` +
-                          `4. Bonus will be activated within 5 minutes!\n\n` +
+                          `4. Your bonus will be activated!\n\n` +
                           `🎁 Bonus Won: ${currentPrize.type}\n` +
                           `💰 Deposit: ${currentPrize.deposit}\n` +
                           `🛡️ Protection: ${currentPrize.ifLose}\n` +
                           `💸 Redeem: ${currentPrize.redeem}\n` +
-                          `⚡ Cashout: INSTANT`;
+                          `⚡ Cashout: INSTANT\n\n` +
+                          `✅ Screenshot and send to us!`;
             
             alert(message);
         }
 
         function createConfetti(color) {
-            // Simple confetti effect
-            const confettiCount = 25;
-            const emojis = ['🎉', '🎊', '✨', '⭐', '🎁'];
+            // Confetti effect
+            const confettiCount = 30;
+            const emojis = ['🎉', '🎊', '✨', '⭐', '🎁', '💰', '🏆'];
             
             for (let i = 0; i < confettiCount; i++) {
                 const confetti = document.createElement('div');
                 confetti.style.position = 'fixed';
-                confetti.style.fontSize = '1.2rem';
+                confetti.style.fontSize = '1.5rem';
                 confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
                 confetti.style.color = color;
                 confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.top = '-30px';
+                confetti.style.top = '-40px';
                 confetti.style.zIndex = '9999';
                 confetti.style.pointerEvents = 'none';
-                confetti.style.textShadow = `0 0 8px ${color}`;
+                confetti.style.textShadow = `0 0 10px ${color}`;
                 
                 const animation = confetti.animate([
                     { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
                     { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
                 ], {
-                    duration: Math.random() * 1500 + 1000,
+                    duration: Math.random() * 2000 + 1000,
                     easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
                 });
                 
